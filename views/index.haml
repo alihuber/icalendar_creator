@@ -1,0 +1,128 @@
+!!!5
+%html
+  %head
+    %title
+      iCalendar Creator
+    %link{ :rel => "stylesheet", :href => "lib/bootstrap/css/bootstrap.min.css" }
+    %link{ :rel => "stylesheet", :href => "lib/datepicker.css" }
+    %link{ :rel => "stylesheet", :href => "lib/timepicker.css" }
+
+    %script{ :src => "/lib/jquery-1.8.3.min.js", :type => "text/javascript" }
+    %script{ :src => "lib/bootstrap/js/bootstrap.min.js", :type => "text/javascript" }
+    %script{ :src => "/lib/datepicker.js", :type => "text/javascript" }
+    %script{ :src => "/lib/timepicker.js", :type => "text/javascript" }
+    %script{ :src => "/lib/script.js", :type => "text/javascript" }
+    :javascript
+      // handle twitter api
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+  %body
+    %div.container
+      %div.row
+        %div.span12
+          %div.navbar
+            %div.navbar-inner
+              %a.brand{ :href => "#" }
+                iCalendar Creator
+              %ul.nav.pull-right
+                %li{ :style => "margin-top: 10px" }
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+      %div.well
+        %h2
+          - if @language == 'de'
+            Erstelle eine iCalendar-Datei.
+          - else
+            Create an iCalendar file.
+        %p
+          - if @language == 'de'
+            Importierbar in Google Kalender, Microsoft Outlook oder Apple-Produkten und mit so vielen Terminen wie du möchtest.
+          - else
+            It can be imported by Google Calendar, Microsoft
+            Outlook and Apple applications and supports as many
+            events as you wish.
+
+      %div.well
+        %form.form-horizontal{:id => "eventForm", :method => "post", :action => "/" }
+          %fieldset
+            %div.control-group
+              %label.control-label{ :for => "inputEventName" }
+                - if @language == 'de'
+                  Terminname:
+                - else
+                  Event Name:
+              %div.controls
+                - if @language == 'de'
+                  %input.input-block-level{ :type => "text", :id => "inputEventName", :placeholder => "Terminname", :name => "event_name" }
+                - else
+                  %input.input-block-level{ :type => "text", :id => "inputEventName", :placeholder => "Event Name", :name => "event_name" }
+            %div.control-group
+              %label.control-label{ :for => "inputStartDate" }
+                - if @language == 'de'
+                  Startdatum/Zeit:
+                - else
+                  Start Date/Time:
+              %div.controls
+                - if @language == 'de'
+                  %input.input-xlarge{ :type => "text", :id => "inputStartDate", :placeholder => "Startdatum", :name => "start_date" }
+                  %input.input-xlarge{ :type => "text", :id => "inputStartTime", :placeholder => "Von", :name => "start_time" }
+                - else
+                  %input.input-xlarge{ :type => "text", :id => "inputStartDate", :placeholder => "Start Date", :name => "start_date" }
+                  %input.input-xlarge{ :type => "text", :id => "inputStartTime", :placeholder => "Start Time", :name => "start_time" }
+            %div.control-group
+              %label.control-label{ :for => "inputEndDate" }
+                - if @language == 'de'
+                  Enddatum/Zeit:
+                - else
+                  End Date/Time:
+              %div.controls
+                - if @language == 'de'
+                  %input.input-xlarge{ :type => "text", :id => "inputEndDate", :placeholder => "Enddatum", :name => "end_date" }
+                  %input.input-xlarge{ :type => "text", :id => "inputEndTime", :placeholder => "Bis", :name => "end_time" }
+                - else
+                  %input.input-xlarge{ :type => "text", :id => "inputEndDate", :placeholder => "End Date", :name => "end_date" }
+                  %input.input-xlarge{ :type => "text", :id => "inputEndTime", :placeholder => "End Time", :name => "end_time" }
+                %label.checkbox.inline
+                  %input{:type => "checkbox", :id => "wholeDayCheckbox", :value => "wholeday", :name => "wholeday" }
+                    -if @language == 'de'
+                      Ganztägig
+                    - else
+                      All-day
+            %div.control-group
+              %label.control-label{ :for => "inputLocation" }
+                - if @language == 'de'
+                  Ort:
+                - else
+                  Location:
+              %div.controls
+                - if @language == 'de'
+                  %input.input-block-level{ :type => "text", :id => "inputLocation", :placeholder => "Ort", :name => "location" }
+                - else
+                  %input.input-block-level{ :type => "text", :id => "inputLocation", :placeholder => "Location", :name => "location" }
+            %div.control-group
+              %label.control-label{ :for => "inputDescription" }
+                -if @language == 'de'
+                  Beschreibung:
+                - else
+                  Description:
+              %div.controls
+                - if @language == 'de'
+                  %input.input-block-level{ :type => "text", :id => "inputDescription", :placeholder => "Beschreibung", :name => "description" }
+                - else
+                  %input.input-block-level{ :type => "text", :id => "inputDescription", :placeholder => "Description", :name => "description" }
+            %div.control-group
+              %div.controls
+                %button{ :type => "submit", :class => "btn btn-primary", :id => "submitButton" }
+                  -if @language == 'de'
+                    Termin hinzufügen
+                  - else
+                    Create Event
+                %button{ :type => "button", :class => "btn", :id => "clearButton" }
+                  -if @language == 'de'
+                    Felder leeren
+                  - else
+                    Clear entries
+                %button{ :type => "button", :class => "btn btn-success pull-right", :id => "generateButton", :onclick => "window.location='/generate'" , :disabled => "disabled" }
+                  -if @language == 'de'
+                    Datei erstellen
+                  - else
+                    Generate file

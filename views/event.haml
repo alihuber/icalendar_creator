@@ -1,0 +1,98 @@
+:javascript
+  // ajax for delete events
+  // via 'on' event handler
+  $("#deleteForm#{@id}").on("submit", function(event){
+   event.preventDefault();
+   var id = "#{@id}";
+
+    $.ajax({
+      url: "/delete",
+      // we want to send the id of the event to delete
+      data: id,
+      success: function(data) {
+        // no returning data
+      }
+    });
+    removeEvent(id);
+  });
+
+
+  function removeEvent(id) {
+    // see supplant function in script.js
+    var toDelete = "#deleteForm{id}".supplant({id: id});
+    $(toDelete).closest(".well").remove();
+    // only 2 wells on site: all events removed, disable
+    // file creation
+    if($(".well").size() == 2) {
+      $("#generateButton").attr("disabled", "disabled");
+    }
+  }
+
+
+%div.well
+  %table.table
+    %thead
+      %tr
+        %th
+          - if @language == 'de'
+            Terminname
+          - else
+            Event name
+        %th
+          - if @language == 'de'
+            Startdatum
+          - else
+            Start Date
+        - if @event.start_time
+          %th
+            - if @language == 'de'
+              Von
+            - else
+              Start Time
+        %th
+          - if @language == 'de'
+            Enddatum
+          - else
+            End Date
+        - if @event.end_time
+          %th
+            - if @language == 'de'
+              Bis
+            - else
+              End Time
+        %th
+          - if @language == 'de'
+            Ort
+          - else
+            Location
+        %th
+          - if @language == 'de'
+            Beschreibung
+          - else
+            Description
+
+    %body
+      %tr
+        %td
+          = @event.name
+        %td
+          = @event.start_date
+        - if @event.start_time
+          %td
+            = @event.start_time
+        %td
+          = @event.end_date
+        - if @event.end_time
+          %td
+            = @event.end_time
+        %td
+          = @event.location
+        %td
+          = @event.description
+  %div.offset10
+    %form{ :method => "post", :id => "deleteForm#{@id}" }
+      %button{ :type => 'submit', :class => 'btn btn-warning', :id => "deleteButton#{@id}" }
+        - if @language == 'de'
+          Entfernen
+        - else
+          Delete
