@@ -24,15 +24,15 @@ describe "basic event creation", :type => :feature do
   it "displays a created event" do
     visit '/'
     fill_in("inputEventName", :with => "Test")
-    fill_in("inputStartDate", :with => "02/12/2012")
+    fill_in("inputStartDate", :with => "12.02.2012")
     fill_in("inputStartTime", :with => "11:00")
-    fill_in("inputEndDate", :with => "02/12/2012")
+    fill_in("inputEndDate", :with => "12.02.2012")
     fill_in("inputEndTime", :with => "12:00")
     fill_in("inputLocation", :with => "Loc")
     fill_in("inputDescription", :with => "Desc")
     click_button("submitButton")
     page.should have_text("Test")
-    page.should have_text("02/12/2012")
+    page.should have_text("12.02.2012")
     page.should have_text("11:00")
     page.should have_text("12:00")
     page.should have_text("Loc")
@@ -50,9 +50,9 @@ describe "mass event creation", :type => :feature do
     visit '/'
     (1..10).each do |i|
       fill_in("inputEventName", :with => "Test#{i}")
-      fill_in("inputStartDate", :with => "02/12/2012")
+      fill_in("inputStartDate", :with => "12.02.2012")
       fill_in("inputStartTime", :with => "11:00")
-      fill_in("inputEndDate", :with => "02/12/2012")
+      fill_in("inputEndDate", :with => "12.02.2012")
       fill_in("inputEndTime", :with => "12:00")
       fill_in("inputLocation", :with => "Loc#{i}")
       fill_in("inputDescription", :with => "Desc#{i}")
@@ -72,9 +72,9 @@ describe "basic event deletion", :type => :feature do
   it "deletes one event" do
     visit '/'
     fill_in("inputEventName", :with => "Test")
-    fill_in("inputStartDate", :with => "02/12/2012")
+    fill_in("inputStartDate", :with => "12.02.2012")
     fill_in("inputStartTime", :with => "11:00")
-    fill_in("inputEndDate", :with => "02/12/2012")
+    fill_in("inputEndDate", :with => "12.02.2012")
     fill_in("inputEndTime", :with => "12:00")
     fill_in("inputLocation", :with => "Testlocation")
     fill_in("inputDescription", :with => "Testdescription")
@@ -97,9 +97,9 @@ describe "mass event deletion", :type => :feature do
     visit '/'
     (1..10).each do |i|
       fill_in("inputEventName", :with => "Test#{i}")
-      fill_in("inputStartDate", :with => "02/12/2012")
+      fill_in("inputStartDate", :with => "12.02.2012")
       fill_in("inputStartTime", :with => "11:00")
-      fill_in("inputEndDate", :with => "02/12/2012")
+      fill_in("inputEndDate", :with => "12.02.2012")
       fill_in("inputEndTime", :with => "12:00")
       fill_in("inputLocation", :with => "Loc#{i}")
       fill_in("inputDescription", :with => "Desc#{i}")
@@ -127,9 +127,9 @@ describe "mixed event creation and deletion", :type => :feature do
 
     (1..3).each do |i|
       fill_in("inputEventName", :with => "Test#{i}")
-      fill_in("inputStartDate", :with => "02/12/2012")
+      fill_in("inputStartDate", :with => "12.02.2012")
       fill_in("inputStartTime", :with => "11:00")
-      fill_in("inputEndDate", :with => "02/12/2012")
+      fill_in("inputEndDate", :with => "12.02.2012")
       fill_in("inputEndTime", :with => "12:00")
       fill_in("inputLocation", :with => "Loc#{i}")
       fill_in("inputDescription", :with => "Desc#{i}")
@@ -143,9 +143,9 @@ describe "mixed event creation and deletion", :type => :feature do
 
     (4..6).each do |i|
       fill_in("inputEventName", :with => "Test#{i}")
-      fill_in("inputStartDate", :with => "02/12/2012")
+      fill_in("inputStartDate", :with => "12.02.2012")
       fill_in("inputStartTime", :with => "11:00")
-      fill_in("inputEndDate", :with => "02/12/2012")
+      fill_in("inputEndDate", :with => "12.02.2012")
       fill_in("inputEndTime", :with => "12:00")
       fill_in("inputLocation", :with => "Loc#{i}")
       fill_in("inputDescription", :with => "Desc#{i}")
@@ -163,15 +163,15 @@ describe "mixed event creation and deletion", :type => :feature do
     click_button("deleteButton5")
 
     fill_in("inputEventName", :with => "Test")
-    fill_in("inputStartDate", :with => "02/12/2012")
+    fill_in("inputStartDate", :with => "12.02.2012")
     fill_in("inputStartTime", :with => "11:00")
-    fill_in("inputEndDate", :with => "02/12/2012")
+    fill_in("inputEndDate", :with => "12.02.2012")
     fill_in("inputEndTime", :with => "12:00")
     fill_in("inputLocation", :with => "Loc")
     fill_in("inputDescription", :with => "Desc")
     click_button("submitButton")
     page.should have_text("Test")
-    page.should have_text("02/12/2012")
+    page.should have_text("12.02.2012")
     page.should have_text("11:00")
     page.should have_text("12:00")
     page.should have_text("Loc")

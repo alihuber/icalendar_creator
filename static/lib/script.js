@@ -2,10 +2,10 @@ $(document).ready(function() {
 
   var language = window.navigator.userLanguage || window.navigator.language;
   var dateformat = '';
-  if(language == 'de') {
-    dateformat = "dd.mm.yyyy";
-  } else {
+  if(language.startsWith('en')) {
     dateformat = "mm/dd/yyyy";
+  } else {
+    dateformat = "dd.mm.yyyy";
   }
 
   $("#clearButton").click(function() {
@@ -132,4 +132,9 @@ String.prototype.supplant = function (o) {
   );
 };
 
-
+// startswith helper function
+if (typeof String.prototype.startsWith != 'function') {
+  String.prototype.startsWith = function (str){
+    return this.slice(0, str.length) == str;
+  };
+}
