@@ -9,9 +9,10 @@ Capybara.default_driver = :selenium
 
 # smoke test
 describe "visiting index site", :type => :feature do
+  # selenium's firefox does have german accept language header
   it "gets the index page" do
     visit '/'
-    page.should have_text("Create an iCalendar file.")
+    page.should have_text("Erstelle eine iCalendar-Datei.")
   end
 end
 
