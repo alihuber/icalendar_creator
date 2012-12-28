@@ -9,7 +9,6 @@ Capybara.default_driver = :selenium
 
 # smoke test
 describe "visiting index site", :type => :feature do
-  # selenium's firefox does have german accept language header
   it "gets the index page" do
     visit '/'
     page.should have_text("Erstelle eine iCalendar-Datei.")
@@ -19,8 +18,6 @@ end
 
 describe "basic event creation", :type => :feature do
 
-  # selenium does set window.navigator.userLanguage
-  # to English, so we will test with US-format dates
   it "displays a created event" do
     visit '/'
     fill_in("inputEventName", :with => "Test")
