@@ -19,7 +19,7 @@ class ICalendarApp < Sinatra::Base
     # the user refreshes/leaves the page
     session.clear
     session[:calendar] = ICalendarCreator.new
-    @language = extract_locale_from_accept_language_header
+    extract_locale_from_accept_language_header
     haml :index
   end
 
@@ -35,7 +35,7 @@ class ICalendarApp < Sinatra::Base
 
   # a new event is added
   get '/new' do
-    @language = extract_locale_from_accept_language_header
+    extract_locale_from_accept_language_header
     # "event_name"=>"Test3",
     # "start_date"=>"16.12.2012",
     # "start_time"=>"22:24",
@@ -85,7 +85,7 @@ class ICalendarApp < Sinatra::Base
   end
 
   def extract_locale_from_accept_language_header
-    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    @language = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
   end
 
   run! if app_file == $0
