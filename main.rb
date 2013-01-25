@@ -1,9 +1,9 @@
-require 'sinatra/base'
+require 'sinatra'
 require 'haml'
 require 'tempfile'
 require_relative 'ical.rb'
 
-class ICalendarApp < Sinatra::Base
+class ICalendarApp < Sinatra::Application
   set :haml, :format => :html5
 
   # sessions store generated events
