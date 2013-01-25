@@ -2,10 +2,10 @@ $(document).ready(function() {
 
   var language = window.navigator.userLanguage || window.navigator.language;
   var dateformat = '';
-  if(language.startsWith('en')) {
-    dateformat = "mm/dd/yyyy";
-  } else {
+  if(language == 'de') {
     dateformat = "dd.mm.yyyy";
+  } else {
+    dateformat = "mm/dd/yyyy";
   }
 
   $("#clearButton").click(function() {
@@ -88,7 +88,58 @@ $(document).ready(function() {
       }
     });
 
+
+    checkDates();
   }
+
+
+  // handle incorrect dates
+  function checkDates() {
+
+    var date1 = $("[id=inputStartDate]").attr('value');
+    var date2 = $("[id=inputEndDate]").attr('value');
+
+    // "dd.mm.yyyy"
+    // "mm/dd/yyyy";
+    // Objectname = new Date(Year, Month, Day);
+
+    var dateary1;
+    var dateary2;
+
+    if(language == "de") {
+
+      dateary1 = date1.split(".");
+      dateary2 = date2.split(".");
+
+      var year1 = parseInt(dateary1[2]);
+      var year2 = parseInt(dateary2[2]);
+
+      var month1 = parseInt(dateary1[1]);
+      var month2 = parseInt(dateary2[1]);
+
+      var day1 = parseInt(dateary1[0]);
+      var day2 = parseInt(dateary2[0]);
+
+      var compDate1 = new Date(year1, month1, day1);
+      var compDate2 = new Date(year2, month2, day2);
+
+      if(compDate2 < compDate1) {
+        $("[id=inputEndDate]").closest('.control-group').addClass('error');
+        alert('funzt');
+        errorCount += 1;
+      }
+
+    } else  {
+      var compDate1 = new Date(date1);
+      var compDate2 = new Date(date2);
+      if(compDate2 < compDate1) {
+        alert('funzt');
+        $("[id=inputEndDate]").closest('.control-group').addClass('error');
+        errorCount += 1;
+      }
+    }
+  }
+
 
 
   // ajax and UI for add event
@@ -96,7 +147,7 @@ $(document).ready(function() {
 
     event.preventDefault();
 
-    // errors found: don't submit
+    // when errors found: don't submit
     checkForm();
     if(errorCount > 0) {
       return;
@@ -132,9 +183,4 @@ String.prototype.supplant = function (o) {
   );
 };
 
-// startswith helper function
-if (typeof String.prototype.startsWith != 'function') {
-  String.prototype.startsWith = function (str){
-    return this.slice(0, str.length) == str;
-  };
-}
+
