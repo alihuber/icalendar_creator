@@ -90,6 +90,7 @@ $(document).ready(function() {
 
 
     checkDates();
+    checkTimes();
   }
 
 
@@ -125,7 +126,6 @@ $(document).ready(function() {
 
       if(compDate2 < compDate1) {
         $("[id=inputEndDate]").closest('.control-group').addClass('error');
-        alert('funzt');
         errorCount += 1;
       }
 
@@ -133,13 +133,33 @@ $(document).ready(function() {
       var compDate1 = new Date(date1);
       var compDate2 = new Date(date2);
       if(compDate2 < compDate1) {
-        alert('funzt');
         $("[id=inputEndDate]").closest('.control-group').addClass('error');
         errorCount += 1;
       }
     }
   }
 
+
+
+  function checkTimes() {
+    // the event is a one-day event
+    var date1 = $("[id=inputStartDate]").attr('value');
+    var date2 = $("[id=inputEndDate]").attr('value');
+
+    // it is possible to enter times and then choose all-day
+    if(date1 == date2 && !$("#wholeDayCheckbox").prop('checked')) {
+      var time1 = $("[id=inputStartTime]").attr('value');
+      var time2 = $("[id=inputEndTime]").attr('value');
+
+      var compDate1 = Date.parse("01/01/2013 " + time1 + ":00");
+      var compDate2 = Date.parse("01/01/2013 " + time2 + ":00");
+
+      if(compDate2 < compDate1) {
+        $("[id=inputEndDate]").closest('.control-group').addClass('error');
+        errorCount += 1;
+      }
+    }
+  }
 
 
   // ajax and UI for add event
