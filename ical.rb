@@ -9,8 +9,8 @@ class EventStringCreator
   def create_all_day_non_us_date
     # Input: 31.12.2012
     # Output: 20121231
-    "DTSTART:VALUE=DATE:" + @event.start_date.split(".").reverse!.join + "\n" +
-    "DTEND:VALUE=DATE:" + @event.end_date.split(".").reverse!.join + "\n"
+    "DTSTART;VALUE=DATE:" + @event.start_date.split(".").reverse!.join + "\n" +
+    "DTEND;VALUE=DATE:" + @event.end_date.split(".").reverse!.join + "\n"
   end
 
   def create_all_day_us_date
@@ -18,8 +18,8 @@ class EventStringCreator
     # Output: 20121231
     start_ary = @event.start_date.split("/")
     end_ary = @event.end_date.split("/")
-    "DTSTART:VALUE=DATE:" + start_ary[2] + start_ary[0] + start_ary[1] + "\n" +
-    "DTEND:VALUE=DATE:" + end_ary[2] + end_ary[0] + end_ary[1] + "\n"
+    "DTSTART;VALUE=DATE:" + start_ary[2] + start_ary[0] + start_ary[1] + "\n" +
+    "DTEND;VALUE=DATE:" + end_ary[2] + end_ary[0] + end_ary[1] + "\n"
   end
 
   def create_non_all_day_non_us_date
