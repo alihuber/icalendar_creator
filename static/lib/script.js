@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   var language = window.navigator.userLanguage || window.navigator.language;
   var dateformat = '';
-  if(language == 'de') {
+  if(language == 'de-DE') {
     dateformat = "dd.mm.yyyy";
   } else {
     dateformat = "mm/dd/yyyy";
