@@ -28,11 +28,60 @@
     }
   }
 
+- rep_string = ""
+- if @language == 'de'
+  - if @event.repetition_interval.to_i < 2
+    - if @event.repetition_freq == "DAILY" || @event.repetition_freq == "MONTHLY"
+      - rep_string += "Jeden "
+    - elsif @event.repetition_freq == "WEEKLY"
+      - rep_string += "Jede Woche"
+    - elsif @event.repetition_freq == "YEARLY"
+      - rep_string += "Jedes Jahr"
+    - if @event.repetition_freq == "DAILY"
+      - rep_string += "Tag"
+    - if @event.repetition_freq == "MONTHLY"
+      - rep_string += "Monat"
+  - else
+    - rep_string += "Alle "
+    - rep_string += @event.repetition_interval
+    - if @event.repetition_freq == "DAILY"
+      - rep_string += " Tage"
+    - if @event.repetition_freq == "WEEKLY"
+      - rep_string += " Wochen"
+    - if @event.repetition_freq == "MONTHLY"
+      - rep_string " Monate"
+    - if @event.repetition_freq == "YEARLY"
+      - rep_string " Jahre"
+
+- if @language == 'en'
+  - rep_string += "Every "
+  - if @event.repetition_interval.to_i < 2
+    - if @event.repetition_freq == "DAILY"
+      - rep_string += "day"
+    - if @event.repetition_freq == "WEEKLY"
+      - rep_string += "week"
+    - if @event.repetition_freq == "MONTHLY"
+      - rep_string += "month"
+    - if @event.repetition_freq == "YEARLY"
+      - rep_string += "year"
+  - else
+    - rep_string += @event.repetition_interval
+    - if @event.repetition_freq == "DAILY"
+      - rep_string += " days"
+    - if @event.repetition_freq == "WEEKLY"
+      - rep_string += " weeks"
+    - if @event.repetition_freq == "MONTHLY"
+      - rep_string += " months"
+    - if @event.repetition_freq == "YEARLY"
+      - rep_string += " years"
 
 %div.well
   %table.table
     %thead
       %tr
+        %th
+          - if @event.is_repeated
+            %i{:class => "icon-repeat"}
         %th
           - if @language == 'de'
             Terminname
@@ -73,6 +122,8 @@
 
     %body
       %tr
+        %td
+          = "#{rep_string}"
         %td
           = @event.name
         %td

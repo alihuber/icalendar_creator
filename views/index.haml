@@ -62,9 +62,10 @@
                   Event Name:
               %div.controls
                 - if @language == 'de'
-                  %input.input-block-level{ :type => "text", :id => "inputEventName", :placeholder => "Terminname", :name => "event_name" }
+                  %input.input-block-level{ :type => "text", :id => "inputEventName", :placeholder => "Terminname", :name => "name" }
                 - else
-                  %input.input-block-level{ :type => "text", :id => "inputEventName", :placeholder => "Event Name", :name => "event_name" }
+                  %input.input-block-level{ :type => "text", :id => "inputEventName", :placeholder => "Event Name", :name => "name" }
+
             %div.control-group
               %label.control-label{ :for => "inputStartDate" }
                 - if @language == 'de'
@@ -78,6 +79,7 @@
                 - else
                   %input.input-xlarge{ :type => "text", :id => "inputStartDate", :placeholder => "Start Date", :name => "start_date" }
                   %input.input-xlarge{ :type => "text", :id => "inputStartTime", :placeholder => "Start Time", :name => "start_time" }
+
             %div.control-group
               %label.control-label{ :for => "inputEndDate" }
                 - if @language == 'de'
@@ -97,6 +99,7 @@
                       Ganztägig
                     - else
                       All-day
+
             %div.control-group
               %label.control-label{ :for => "inputLocation" }
                 - if @language == 'de'
@@ -108,6 +111,7 @@
                   %input.input-block-level{ :type => "text", :id => "inputLocation", :placeholder => "Ort", :name => "location" }
                 - else
                   %input.input-block-level{ :type => "text", :id => "inputLocation", :placeholder => "Location", :name => "location" }
+
             %div.control-group
               %label.control-label{ :for => "inputDescription" }
                 -if @language == 'de'
@@ -119,6 +123,39 @@
                   %input.input-block-level{ :type => "text", :id => "inputDescription", :placeholder => "Beschreibung", :name => "description" }
                 - else
                   %input.input-block-level{ :type => "text", :id => "inputDescription", :placeholder => "Description", :name => "description" }
+
+            %div.control-group
+              %label.control-label{ :for => "inputRepetition" }
+                - if @language == 'de'
+                  Wiederholen/Zeitabstand:
+                - else
+                  Repeat/Interval:
+              %div.controls
+                - if @language == 'de'
+                  %select.input-xlarge{ :type => "select", :id => "inputRepFreq", "placeholder" => "", "name" => "repetition_freq" }
+                    %option
+                    %option
+                      Täglich
+                    %option
+                      Wöchentlich
+                    %option
+                      Monatlich
+                    %option
+                      Jährlich
+                  %input.input-xlarge{ :type => "text", :id => "inputInterval", :placeholder => "Zeitabstand (Standard: 1)", :name => "repetition_interval" }
+                - else
+                  %select.input-xlarge{ :type => "select", :id => "inputRepFreq", "name" => "repetition_freq" }
+                    %option
+                    %option
+                      Daily
+                    %option
+                      Weekly
+                    %option
+                      Montyly
+                    %option
+                      Yearly
+                  %input.input-xlarge{ :type => "text", :id => "inputInterval", :placeholder => "Interval (default: 1)", :name => "repetition_interval" }
+
             %div.control-group
               %div.controls
                 %button{ :type => "submit", :class => "btn btn-primary", :id => "submitButton" }
