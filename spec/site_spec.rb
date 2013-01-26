@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require './main.rb'
 require 'capybara'
 require 'capybara/dsl'
@@ -21,15 +23,15 @@ describe "basic event creation", :type => :feature do
   it "displays a created event" do
     visit '/'
     fill_in("inputEventName", :with => "Test")
-    fill_in("inputStartDate", :with => "12/02/2012")
+    fill_in("inputStartDate", :with => "12.02.2012")
     fill_in("inputStartTime", :with => "11:00")
-    fill_in("inputEndDate", :with => "12/02/2012")
+    fill_in("inputEndDate", :with => "12.02.2012")
     fill_in("inputEndTime", :with => "12:00")
     fill_in("inputLocation", :with => "Loc")
     fill_in("inputDescription", :with => "Desc")
     click_button("submitButton")
     page.should have_text("Test")
-    page.should have_text("12/02/2012")
+    page.should have_text("12.02.2012")
     page.should have_text("11:00")
     page.should have_text("12:00")
     page.should have_text("Loc")
@@ -37,7 +39,42 @@ describe "basic event creation", :type => :feature do
     # the next test shows also that id creation of first event is correct
     page.should have_button("deleteButton1")
   end
+end
 
+
+describe "repeated event creation", :type => :feature do
+  it "displays a created event with repetition and no interval" do
+    visit '/'
+    fill_in("inputEventName", :with => "Test")
+    fill_in("inputStartDate", :with => "02.12.2012")
+    fill_in("inputStartTime", :with => "11:00")
+    fill_in("inputEndDate", :with => "02.12.2012")
+    fill_in("inputEndTime", :with => "12:00")
+    fill_in("inputLocation", :with => "Loc")
+    fill_in("inputDescription", :with => "Desc")
+    page.select("Täglich", :from => "inputRepFreq")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Jeden Tag")
+    page.should have_button("deleteButton1")
+  end
+
+  it "displays a created event with repetition and interval" do
+    visit '/'
+    fill_in("inputEventName", :with => "Test")
+    fill_in("inputStartDate", :with => "02.12.2012")
+    fill_in("inputStartTime", :with => "11:00")
+    fill_in("inputEndDate", :with => "02.12.2012")
+    fill_in("inputEndTime", :with => "12:00")
+    fill_in("inputLocation", :with => "Loc")
+    fill_in("inputDescription", :with => "Desc")
+    page.select("Wöchentlich", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "12")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Alle 12 Wochen")
+    page.should have_button("deleteButton1")
+  end
 end
 
 

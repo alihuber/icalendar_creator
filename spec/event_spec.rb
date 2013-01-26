@@ -135,7 +135,7 @@ describe "us date event creation" do
                           "end_date" => "02/24/2012",
                           "location" => "Loc3",
                           "description" => "Desc3",
-                          "wholeday" => "wholeday"}) }
+                          "wholeday" => "wholeday", "repetition_freq" => ""}) }
 
   it "should be us format" do
     event3.is_us_format.should be true
@@ -150,17 +150,14 @@ describe "standard repeated event creation" do
                           "location" => "Loc4",
                           "description" => "Desc4",
                           "wholeday" => "wholeday",
-                          "repetition_freq" => "weekly",
+                          "repetition_freq" => "Weekly",
                           "repetition_interval" => ""}) }
 
   it "should know it is repeated once a week" do
-    event4.repetition_freq.should eql "weekly"
+    event4.repetition_freq.should eql "WEEKLY"
     event4.repetition_interval.should eql "1"
   end
 end
-
-
-
 
 describe "interval repeated event creation" do
   let(:event5) { Event.new({"name" => "Test5", "start_date" => "02/23/2012",
@@ -168,11 +165,28 @@ describe "interval repeated event creation" do
                           "location" => "Loc5",
                           "description" => "Desc5",
                           "wholeday" => "wholeday",
-                          "repetition_freq" => "daily",
+                          "repetition_freq" => "Daily",
                           "repetition_interval" => "2"}) }
 
   it "should know it is repeated every other day" do
-    event5.repetition_freq.should eql "daily"
+    event5.repetition_freq.should eql "DAILY"
     event5.repetition_interval.should eql "2"
+  end
+end
+
+
+
+describe "interval repeated event creation with bad strings" do
+  let(:event5) { Event.new({"name" => "Test5", "start_date" => "02/23/2012",
+                          "end_date" => "02/24/2012",
+                          "location" => "Loc5",
+                          "description" => "Desc5",
+                          "wholeday" => "wholeday",
+                          "repetition_freq" => "daily",
+                          "repetition_interval" => "asdf"}) }
+
+  it "should be repeated every other day despite false string" do
+    event5.repetition_freq.should eql "DAILY"
+    event5.repetition_interval.should eql "1"
   end
 end

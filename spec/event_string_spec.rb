@@ -108,13 +108,9 @@ end
 
 describe "all day us date creation" do
 
-#   let(:event3) { Event.new(['Test3', '02/23/2012',
-#                           '02/24/2012',
-#                           'Loc3', 'Desc3']) }
-#   let(:evc) { EventStringCreator.new(event3) }
   let(:event3) { Event.new({"name" => 'Test3', "start_date" => '02/23/2012',
                            "end_date" => '02/24/2012', "wholeday" => "wholeday",
-                          "location" => 'Loc3', "description" => 'Desc3'}) }
+                          "location" => 'Loc3', "description" => 'Desc3', "repetition_freq" => ""}) }
   let(:evc) { EventStringCreator.new(event3) }
 
   it "should be able to create an all day us date string" do
@@ -127,7 +123,8 @@ describe "non all day us date creation" do
 
   let(:event) { Event.new({"name" => 'Test', "start_date" => '02/23/2012',
                           "end_date" => '02/24/2012', "start_time" => '11:00',
-                          "end_time" => '12:00', "location" => 'Loc', "description" => 'Desc'}) }
+                          "end_time" => '12:00', "location" => 'Loc', "description" => 'Desc',
+                          "repetition_freq" => ""}) }
   let(:evc) { EventStringCreator.new(event) }
 
   it "should be able to create an non all day us date string" do
