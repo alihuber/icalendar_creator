@@ -112,7 +112,7 @@ describe "all day us date creation" do
   let(:evc) { EventStringCreator.new(event3) }
 
   it "should be able to create an all day us date string" do
-    evc.create_all_day_us_date.should eq "DTSTART:VALUE=DATE:20120223\nDTEND:VALUE=DATE:20120224\n"
+    evc.create_all_day_us_date.should eq "DTSTART;VALUE=DATE:20120223\nDTEND;VALUE=DATE:20120224\n"
   end
 end
 
@@ -130,7 +130,7 @@ describe "non all day us date creation" do
 end
 
 
-describe "complete event string creation" do
+describe "complete non-all-day event string creation" do
 
   let(:event) { Event.new(['Test', '23.02.2012',
                           '11:00', '24.02.2012',
@@ -142,3 +142,15 @@ describe "complete event string creation" do
   end
 end
 
+
+describe "complete all-day event string creation" do
+
+  let(:event) { Event.new(['Test', '23.02.2012',
+                          '24.02.2012',
+                          'Loc', 'Desc']) }
+  let(:evc) { EventStringCreator.new(event) }
+
+  it "should create a complete event string" do
+    evc.create_event_string.should eql "BEGIN:VEVENT\nDTSTART;VALUE=DATE:20120223\nDTEND;VALUE=DATE:20120224\nSUMMARY:Test\nLOCATION:Loc\nDESCRIPTION:Desc\nEND:VEVENT\n"
+  end
+end

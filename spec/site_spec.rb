@@ -1,4 +1,4 @@
-require './main'
+require '../main'
 require 'capybara'
 require 'capybara/dsl'
 require 'capybara/rspec'
