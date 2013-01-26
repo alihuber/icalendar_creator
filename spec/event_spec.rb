@@ -2,10 +2,11 @@ require_relative '../ical.rb'
 
 
 describe Event do
-
-  let(:event) { Event.new(['Test', '23.02.2012',
-                          '11:00', '24.02.2012',
-                          '12:00', 'Loc', 'Desc']) }
+  let(:event) { Event.new({"name" => "Test", "start_date" => "23.02.2012",
+                          "start_time" => "11:00",
+                          "end_date" => "24.02.2012",
+                          "end_time" => "12:00", "location" => "loc",
+                          "description" => "desc"}) }
 
   it 'has a name' do
     event.respond_to?(:name).should be true
@@ -39,13 +40,19 @@ describe Event do
     event.respond_to?(:is_all_day).should be true
   end
 
+  it 'knows wheter it is repeated' do
+    event.respond_to?(:repetition_freq).should be true
+  end
+
 end
 
 
 describe "normal event creation" do
-  let(:event) { Event.new(['Test', '23.02.2012',
-                          '11:00', '24.02.2012',
-                          '12:00', 'Loc', 'Desc']) }
+  let(:event) { Event.new({"name" => "Test", "start_date" => "23.02.2012",
+                          "start_time" => "11:00",
+                          "end_date" => "24.02.2012",
+                          "end_time" => "12:00", "location" => "Loc",
+                          "description" => "Desc"}) }
 
   its "name should be 'Test'" do
     event.name.should eq "Test"
@@ -87,9 +94,11 @@ end
 
 
 describe "all day event creation" do
-  let(:event2) { Event.new(['Test2', '23.02.2012',
-                          '24.02.2012',
-                          'Loc2', 'Desc2']) }
+  let(:event2) { Event.new({"name" => "Test2", "start_date" => "23.02.2012",
+                          "end_date" => "24.02.2012",
+                          "location" => "Loc2",
+                          "description" => "Desc2",
+                          "wholeday" => "wholeday"}) }
 
   its "name should be 'Test2'" do
     event2.name.should eq "Test2"
@@ -122,11 +131,48 @@ end
 
 
 describe "us date event creation" do
-  let(:event3) { Event.new(['Test3', '02/23/2012',
-                          '02/23/2012',
-                          'Loc3', 'Desc3']) }
+  let(:event3) { Event.new({"name" => "Test3", "start_date" => "02/23/2012",
+                          "end_date" => "02/24/2012",
+                          "location" => "Loc3",
+                          "description" => "Desc3",
+                          "wholeday" => "wholeday"}) }
 
   it "should be us format" do
     event3.is_us_format.should be true
+  end
+end
+
+
+
+describe "standard repeated event creation" do
+  let(:event4) { Event.new({"name" => "Test4", "start_date" => "02/23/2012",
+                          "end_date" => "02/24/2012",
+                          "location" => "Loc4",
+                          "description" => "Desc4",
+                          "wholeday" => "wholeday",
+                          "repetition_freq" => "weekly",
+                          "repetition_interval" => ""}) }
+
+  it "should know it is repeated once a week" do
+    event4.repetition_freq.should eql "weekly"
+    event4.repetition_interval.should eql "1"
+  end
+end
+
+
+
+
+describe "interval repeated event creation" do
+  let(:event5) { Event.new({"name" => "Test5", "start_date" => "02/23/2012",
+                          "end_date" => "02/24/2012",
+                          "location" => "Loc5",
+                          "description" => "Desc5",
+                          "wholeday" => "wholeday",
+                          "repetition_freq" => "daily",
+                          "repetition_interval" => "2"}) }
+
+  it "should know it is repeated every other day" do
+    event5.repetition_freq.should eql "daily"
+    event5.repetition_interval.should eql "2"
   end
 end
