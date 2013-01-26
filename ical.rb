@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class EventStringCreator
   attr_accessor :event
 
@@ -51,11 +53,30 @@ class EventStringCreator
     output += create_all_day_us_date if @event.is_all_day and @event.is_us_format
     output += create_non_all_day_us_date if not @event.is_all_day and @event.is_us_format
 
+    output += create_event_repetition if @event.is_repeated
+
     output += create_event_name
     output += create_event_location
     output += create_event_description
     output += create_event_end_string
     output
+  end
+
+  def create_event_repetition
+    fix_event_repetition
+    "RRULE:" + "FREQ=" + @event.repetition_freq + ";" +
+    "INTERVAL=" + @event.repetition_interval + "\n"
+  end
+
+  def fix_event_repetition
+    if @event.is_us_format
+      @event.repetition_freq.upcase!
+    else
+        @event.repetition_freq = "YEARLY" if @event.repetition_freq == "Jährlich"
+        @event.repetition_freq = "MONTHLY" if @event.repetition_freq == "Monatlich"
+        @event.repetition_freq = "WEEKLY" if @event.repetition_freq == "Wöchentlich"
+        @event.repetition_freq = "DAILY" if @event.repetition_freq == "Täglich"
+    end
   end
 
   def create_event_description
@@ -108,16 +129,24 @@ end
 
 class Event
   attr_accessor :name, :start_date, :end_date,
-    :start_time, :end_time, :location, :description, :is_all_day, :is_us_format
+    :start_time, :end_time, :location, :description, :is_all_day, :is_us_format,
+    :repetition_freq, :repetition_interval, :is_repeated
 
-  # we expect an array
+  # we expect a hash
   def initialize(args)
-    if args.size == 5
-      @name, @start_date, @end_date, @location, @description = args
+    @name = args["name"]
+    @start_date = args["start_date"]
+    @end_date = args["end_date"]
+    @location = args["location"]
+    @description = args["description"]
+
+    @start_time = args["start_time"] if args.include? "start_time"
+
+    @end_time = args["end_time"] if args.include? "end_time"
+
+    if args.include? "wholeday"
       @is_all_day = true
     else
-      @name, @start_date, @start_time, @end_date,
-        @end_time, @location, @description = args
       @is_all_day = false
     end
 
@@ -126,6 +155,17 @@ class Event
     else
       @is_us_format = false
     end
+
+    @repetition_freq = args["repetition_freq"] if args["repetition_freq"] != ""
+
+    @is_repeated = true if args["repetition_freq"] != ""
+
+    if args["repetition_interval"] != ""
+      @repetition_interval = args["repetition_interval"]
+    else
+      @repetition_interval = "1"
+    end
+
   end
 
 

@@ -36,27 +36,9 @@ class ICalendarApp < Sinatra::Application
   # a new event is added
   get '/new' do
     extract_locale_from_accept_language_header
-    # "event_name"=>"Test3",
-    # "start_date"=>"16.12.2012",
-    # "start_time"=>"22:24",
-    # "end_date"=>"18.12.2012",
-    # "end_time"=>"21:24",
-    # "location"=>"Loc",
-    # "description"=>"Desc"
-    # or
-    # "event_name"=>"Test2",
-    # "start_date"=>"22.12.2012",
-    # "end_date"=>"25.12.2012",
-    # "wholeday"=>"wholeday",
-    # "location"=>"Loc2",
-    # "description"=>"Desc2"
     @event = nil
-    if params.size == 6
-      params.delete("wholeday")
-      @event = Event.new(params.values)
-    else
-      @event = Event.new(params.values)
-    end
+
+    @event = Event.new(params)
 
     # add new Event in this sessions ICalendar
     @id = nil
