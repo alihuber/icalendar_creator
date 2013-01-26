@@ -63,21 +63,10 @@ class EventStringCreator
   end
 
   def create_event_repetition
-    fix_event_repetition
     "RRULE:" + "FREQ=" + @event.repetition_freq + ";" +
     "INTERVAL=" + @event.repetition_interval + "\n"
   end
 
-  def fix_event_repetition
-    if @event.is_us_format
-      @event.repetition_freq.upcase!
-    else
-        @event.repetition_freq = "YEARLY" if @event.repetition_freq == "Jährlich"
-        @event.repetition_freq = "MONTHLY" if @event.repetition_freq == "Monatlich"
-        @event.repetition_freq = "WEEKLY" if @event.repetition_freq == "Wöchentlich"
-        @event.repetition_freq = "DAILY" if @event.repetition_freq == "Täglich"
-    end
-  end
 
   def create_event_description
     "DESCRIPTION:" + @event.description + "\n"
@@ -160,10 +149,20 @@ class Event
 
     @is_repeated = true if args["repetition_freq"] != ""
 
-    if args["repetition_interval"] != ""
+    # check for bad strings, too
+    if args["repetition_interval"] != "" and args["repetition_interval"].to_i != 0
       @repetition_interval = args["repetition_interval"]
     else
       @repetition_interval = "1"
+    end
+
+    if @is_us_format and @is_repeated
+      @repetition_freq.upcase!
+    else
+        @repetition_freq = "YEARLY"  if  @repetition_freq == "Jährlich"
+        @repetition_freq = "MONTHLY" if  @repetition_freq == "Monatlich"
+        @repetition_freq = "WEEKLY"  if  @repetition_freq == "Wöchentlich"
+        @repetition_freq = "DAILY"   if  @repetition_freq == "Täglich"
     end
 
   end
