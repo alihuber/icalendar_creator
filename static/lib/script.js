@@ -85,6 +85,10 @@ $(document).ready(function() {
       if($(this).attr('value') == '' && !$(this).attr('disabled')) {
         $(this).closest('.control-group').addClass('error');
         errorCount += 1;
+        if(($(this).attr('id') == "inputRepFreq") || ($(this).attr('id') == "inputInterval")) {
+          $(this).closest('.control-group').removeClass('error');
+          errorCount -= 1;
+        }
       }
     });
 
