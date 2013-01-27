@@ -130,6 +130,7 @@ describe "all day event creation" do
 end
 
 
+
 describe "us date event creation" do
   let(:event3) { Event.new({"name" => "Test3", "start_date" => "02/23/2012",
                           "end_date" => "02/24/2012",
@@ -175,7 +176,6 @@ describe "interval repeated event creation" do
 end
 
 
-
 describe "interval repeated event creation with bad strings" do
   let(:event5) { Event.new({"name" => "Test5", "start_date" => "02/23/2012",
                           "end_date" => "02/24/2012",
@@ -184,6 +184,71 @@ describe "interval repeated event creation with bad strings" do
                           "wholeday" => "wholeday",
                           "repetition_freq" => "daily",
                           "repetition_interval" => "asdf"}) }
+
+  it "should be repeated every other day despite false string" do
+    event5.repetition_freq.should eql "DAILY"
+    event5.repetition_interval.should eql "1"
+  end
+end
+
+
+describe "interval repeated event creation with negative interval" do
+  let(:event5) { Event.new({"name" => "Test5", "start_date" => "02/23/2012",
+                          "end_date" => "02/24/2012",
+                          "location" => "Loc5",
+                          "description" => "Desc5",
+                          "wholeday" => "wholeday",
+                          "repetition_freq" => "daily",
+                          "repetition_interval" => "-11"}) }
+
+  it "should be repeated every other day despite false string" do
+    event5.repetition_freq.should eql "DAILY"
+    event5.repetition_interval.should eql "1"
+  end
+end
+
+
+describe "interval repeated event creation with interval zero" do
+  let(:event5) { Event.new({"name" => "Test5", "start_date" => "02/23/2012",
+                          "end_date" => "02/24/2012",
+                          "location" => "Loc5",
+                          "description" => "Desc5",
+                          "wholeday" => "wholeday",
+                          "repetition_freq" => "daily",
+                          "repetition_interval" => "0"}) }
+
+  it "should be repeated every other day despite false string" do
+    event5.repetition_freq.should eql "DAILY"
+    event5.repetition_interval.should eql "1"
+  end
+end
+
+
+describe "interval repeated event creation with interval too big" do
+  let(:event5) { Event.new({"name" => "Test5", "start_date" => "02/23/2012",
+                          "end_date" => "02/24/2012",
+                          "location" => "Loc5",
+                          "description" => "Desc5",
+                          "wholeday" => "wholeday",
+                          "repetition_freq" => "daily",
+                          "repetition_interval" => "2147483648"}) }
+
+  it "should be repeated every other day despite false string" do
+    event5.repetition_freq.should eql "DAILY"
+    event5.repetition_interval.should eql "1"
+  end
+end
+
+
+
+describe "interval repeated event creation with interval = 1" do
+  let(:event5) { Event.new({"name" => "Test5", "start_date" => "02/23/2012",
+                          "end_date" => "02/24/2012",
+                          "location" => "Loc5",
+                          "description" => "Desc5",
+                          "wholeday" => "wholeday",
+                          "repetition_freq" => "daily",
+                          "repetition_interval" => "2147483648"}) }
 
   it "should be repeated every other day despite false string" do
     event5.repetition_freq.should eql "DAILY"
