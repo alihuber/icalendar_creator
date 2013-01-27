@@ -2,7 +2,9 @@ $(document).ready(function() {
 
   var language = window.navigator.userLanguage || window.navigator.language;
   var dateformat = '';
-  if(language == 'de-DE') {
+  // sometimes de-DE
+  if(language.startsWith("de")) {
+    language = "de";
     dateformat = "dd.mm.yyyy";
   } else {
     dateformat = "mm/dd/yyyy";
@@ -208,3 +210,9 @@ String.prototype.supplant = function (o) {
 };
 
 
+// startsWith
+if (typeof String.prototype.startsWith != 'function') {
+  String.prototype.startsWith = function (str){
+    return this.slice(0, str.length) == str;
+  };
+}
