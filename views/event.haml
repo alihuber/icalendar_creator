@@ -49,9 +49,9 @@
     - if @event.repetition_freq == "WEEKLY"
       - rep_string += " Wochen"
     - if @event.repetition_freq == "MONTHLY"
-      - rep_string " Monate"
+      - rep_string += " Monate"
     - if @event.repetition_freq == "YEARLY"
-      - rep_string " Jahre"
+      - rep_string += " Jahre"
 
 - if @language == 'en'
   - rep_string += "Every "
