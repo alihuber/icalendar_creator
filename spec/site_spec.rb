@@ -43,7 +43,8 @@ end
 
 
 describe "repeated event creation", :type => :feature do
-  it "displays a created event with repetition and no interval" do
+
+  before(:each) do
     visit '/'
     fill_in("inputEventName", :with => "Test")
     fill_in("inputStartDate", :with => "02.12.2012")
@@ -53,6 +54,9 @@ describe "repeated event creation", :type => :feature do
     fill_in("inputLocation", :with => "Loc")
     fill_in("inputDescription", :with => "Desc")
     page.select("Täglich", :from => "inputRepFreq")
+  end
+
+  it "displays a created event with repetition and no interval" do
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
     page.should have_text("Jeden Tag")
@@ -60,19 +64,10 @@ describe "repeated event creation", :type => :feature do
   end
 
   it "displays a created event with repetition and interval" do
-    visit '/'
-    fill_in("inputEventName", :with => "Test")
-    fill_in("inputStartDate", :with => "02.12.2012")
-    fill_in("inputStartTime", :with => "11:00")
-    fill_in("inputEndDate", :with => "02.12.2012")
-    fill_in("inputEndTime", :with => "12:00")
-    fill_in("inputLocation", :with => "Loc")
-    fill_in("inputDescription", :with => "Desc")
-    page.select("Wöchentlich", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "12")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
-    page.should have_text("Alle 12 Wochen")
+    page.should have_text("Alle 12 Tage")
     page.should have_button("deleteButton1")
   end
 end
@@ -197,15 +192,15 @@ describe "mixed event creation and deletion", :type => :feature do
     click_button("deleteButton5")
 
     fill_in("inputEventName", :with => "Test")
-    fill_in("inputStartDate", :with => "02/02/2012")
+    fill_in("inputStartDate", :with => "02.12.2012")
     fill_in("inputStartTime", :with => "11:00")
-    fill_in("inputEndDate", :with => "02/12/2012")
+    fill_in("inputEndDate", :with => "02.12.2012")
     fill_in("inputEndTime", :with => "12:00")
     fill_in("inputLocation", :with => "Loc")
     fill_in("inputDescription", :with => "Desc")
     click_button("submitButton")
     page.should have_text("Test")
-    page.should have_text("02/12/2012")
+    page.should have_text("02.12.2012")
     page.should have_text("11:00")
     page.should have_text("12:00")
     page.should have_text("Loc")
