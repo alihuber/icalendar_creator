@@ -149,11 +149,13 @@ class Event
 
     @is_repeated = true if args["repetition_freq"] != ""
 
-    # check for bad strings, too
-    if args["repetition_interval"] != "" and args["repetition_interval"].to_i != 0
-      @repetition_interval = args["repetition_interval"]
-    else
+    # Valid values are between 1 and 2147483647, excluding 0
+    # "asdf".to_i -> 0
+    value = args["repetition_interval"]
+    if value == "" or value.to_i > 2147483647 or value.to_i < 1
       @repetition_interval = "1"
+    else
+      @repetition_interval = value
     end
 
     if @is_us_format and @is_repeated
