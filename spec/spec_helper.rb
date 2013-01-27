@@ -5,6 +5,7 @@ require 'selenium/webdriver'
 
 
 Capybara.app = ICalendarApp
+Capybara.default_driver = :selenium
 
 Capybara.register_driver :firefox_en do |app|
   profile = Selenium::WebDriver::Firefox::Profile.new
