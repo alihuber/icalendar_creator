@@ -42,7 +42,7 @@ describe "basic event creation", :type => :feature do
 end
 
 
-describe "repeated event creation", :type => :feature do
+describe "basic repeated event creation", :type => :feature do
 
   before(:each) do
     visit '/'
@@ -60,7 +60,6 @@ describe "repeated event creation", :type => :feature do
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
     page.should have_text("Jeden Tag")
-    page.should have_button("deleteButton1")
   end
 
   it "displays a created event with repetition and interval" do
@@ -68,10 +67,127 @@ describe "repeated event creation", :type => :feature do
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
     page.should have_text("Alle 12 Tage")
-    page.should have_button("deleteButton1")
+  end
+
+  it "displays a correct event with repetition and interval 0" do
+    fill_in("inputInterval", :with => "0")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Jeden Tag")
+  end
+
+  it "displays a correct event with repetition and negative interval" do
+    fill_in("inputInterval", :with => "-100")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Jeden Tag")
   end
 end
 
+describe "german language of repeated event creation", :type => :feature do
+  before(:each) do
+    visit '/'
+    fill_in("inputEventName", :with => "Test")
+    fill_in("inputStartDate", :with => "02.12.2012")
+    fill_in("inputStartTime", :with => "11:00")
+    fill_in("inputEndDate", :with => "02.12.2012")
+    fill_in("inputEndTime", :with => "12:00")
+    fill_in("inputLocation", :with => "Loc")
+    fill_in("inputDescription", :with => "Desc")
+  end
+
+  it "shows correct singular for day" do
+    page.select("Täglich", :from => "inputRepFreq")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Jeden Tag")
+  end
+
+  it "shows correct singular for week" do
+    page.select("Wöchentlich", :from => "inputRepFreq")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Jede Woche")
+  end
+
+  it "shows correct singular for month" do
+    page.select("Monatlich", :from => "inputRepFreq")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Jeden Monat")
+  end
+
+  it "shows correct singular for year" do
+    page.select("Jährlich", :from => "inputRepFreq")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Jedes Jahr")
+  end
+
+  it "shows correct day plural for interval 2" do
+    page.select("Täglich", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "2")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Alle 2 Tage")
+  end
+
+  it "shows correct day plural for interval 100" do
+    page.select("Täglich", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "100")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Alle 100 Tage")
+  end
+
+  it "shows correct week plural for interval 2" do
+    page.select("Wöchentlich", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "2")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Alle 2 Wochen")
+  end
+
+  it "shows correct week plural for interval 100" do
+    page.select("Wöchentlich", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "100")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Alle 100 Wochen")
+  end
+
+  it "shows correct month plural for interval 2" do
+    page.select("Monatlich", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "2")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Alle 2 Monate")
+  end
+
+  it "shows correct month plural for interval 100" do
+    page.select("Monatlich", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "100")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Alle 100 Monate")
+  end
+
+  it "shows correct year plural for interval 2" do
+    page.select("Jährlich", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "2")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Alle 2 Jahre")
+  end
+
+  it "shows correct year plural for interval 100" do
+    page.select("Jährlich", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "100")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Alle 100 Jahre")
+  end
+end
 
 describe "mass event creation", :type => :feature do
 
