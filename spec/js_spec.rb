@@ -282,3 +282,42 @@ describe "javascript behavior with impossible english dates", :type => :feature,
   end
 end
 
+
+
+describe "javascript behavior with impossible german dates/times", :type => :feature do
+  visit '/'
+  it "sets errors right with impossible times on one day" do
+    fill_in("inputEventName", :with => "Test")
+    fill_in("inputStartDate", :with => "02.12.2012")
+    fill_in("inputEndDate", :with => "02.12.2012")
+    fill_in("inputLocation", :with => "Loc")
+    fill_in("inputDescription", :with => "Desc")
+    fill_in("inputStartTime", :with => "12:00")
+    fill_in("inputEndTime", :with => "10:00")
+    click_button("submitButton")
+    page.should have_css("div.control-group.error", :count => 1)
+    fill_in("inputEndTime", :with => "12:00")
+    click_button("submitButton")
+    page.should have_css("div.control-group.error", :count => 0)
+  end
+end
+
+
+
+describe "javascript behavior with impossible english dates/times", :type => :feature, :driver => :firefox_en do
+  visit '/'
+  it "sets errors right with impossible times on one day" do
+    fill_in("inputEventName", :with => "Test")
+    fill_in("inputStartDate", :with => "02/12/2012")
+    fill_in("inputEndDate", :with => "02/12/2012")
+    fill_in("inputLocation", :with => "Loc")
+    fill_in("inputDescription", :with => "Desc")
+    fill_in("inputStartTime", :with => "12:00")
+    fill_in("inputEndTime", :with => "10:00")
+    click_button("submitButton")
+    page.should have_css("div.control-group.error", :count => 1)
+    fill_in("inputEndTime", :with => "12:00")
+    click_button("submitButton")
+    page.should have_css("div.control-group.error", :count => 0)
+  end
+end
