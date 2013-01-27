@@ -1,13 +1,9 @@
 # encoding: utf-8
 
 require './main.rb'
-require 'capybara'
-require 'capybara/dsl'
-require 'capybara/rspec'
+require 'spec_helper'
 
-# no fancy setup
-Capybara.app = ICalendarApp
-Capybara.default_driver = :selenium
+
 
 # smoke test
 describe "visiting index site", :type => :feature do
@@ -188,6 +184,114 @@ describe "german language of repeated event creation", :type => :feature do
     page.should have_text("Alle 100 Jahre")
   end
 end
+
+
+# uses profile for english browser language
+describe "english language of repeated event creation", :type => :feature, :driver => :firefox_en do
+  before(:each) do
+    visit '/'
+    fill_in("inputEventName", :with => "Test")
+    fill_in("inputStartDate", :with => "02/12/2012")
+    fill_in("inputStartTime", :with => "11:00")
+    fill_in("inputEndDate", :with => "02/12/2012")
+    fill_in("inputEndTime", :with => "12:00")
+    fill_in("inputLocation", :with => "Loc")
+    fill_in("inputDescription", :with => "Desc")
+  end
+
+  it "shows correct singular for day" do
+    page.select("Daily", :from => "inputRepFreq")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every day")
+  end
+
+  it "shows correct singular for week" do
+    page.select("Weekly", :from => "inputRepFreq")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every week")
+  end
+
+  it "shows correct singular for month" do
+    page.select("Monthly", :from => "inputRepFreq")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every month")
+  end
+
+  it "shows correct singular for year" do
+    page.select("Yearly", :from => "inputRepFreq")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every year")
+  end
+
+  it "shows correct day plural for interval 2" do
+    page.select("Daily", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "2")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every 2 days")
+  end
+
+  it "shows correct day plural for interval 100" do
+    page.select("Daily", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "100")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every 100 days")
+  end
+
+  it "shows correct week plural for interval 2" do
+    page.select("Weekly", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "2")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every 2 weeks")
+  end
+
+  it "shows correct week plural for interval 100" do
+    page.select("Weekly", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "100")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every 100 weeks")
+  end
+
+  it "shows correct month plural for interval 2" do
+    page.select("Monthly", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "2")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every 2 months")
+  end
+
+  it "shows correct month plural for interval 100" do
+    page.select("Monthly", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "100")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every 100 months")
+  end
+
+  it "shows correct year plural for interval 2" do
+    page.select("Yearly", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "2")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every 2 years")
+  end
+
+  it "shows correct year plural for interval 100" do
+    page.select("Yearly", :from => "inputRepFreq")
+    fill_in("inputInterval", :with => "100")
+    click_button("submitButton")
+    page.should have_css("i.icon-repeat")
+    page.should have_text("Every 100 years")
+  end
+end
+
 
 describe "mass event creation", :type => :feature do
 
