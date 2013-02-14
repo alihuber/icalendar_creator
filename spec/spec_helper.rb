@@ -13,6 +13,11 @@ Capybara.register_driver :firefox_en do |app|
   Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => profile)
 end
 
+Capybara.register_driver :firefox_de do |app|
+  profile = Selenium::WebDriver::Firefox::Profile.new
+  profile["intl.accept_languages"] =  "de"
+  Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => profile)
+end
 
 
 RSpec.configure do |config|

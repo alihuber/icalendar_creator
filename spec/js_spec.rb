@@ -62,7 +62,7 @@ end
 
 
 
-describe "javascript behaviour with more forms filled out", :type => :feature do
+describe "javascript behaviour with more forms filled out", :type => :feature, :driver => :firefox_en do
   before(:each) do
     visit '/'
   end
@@ -130,7 +130,7 @@ describe "javascript behaviour with more forms filled out", :type => :feature do
     fill_in("inputEndTime", :with => "12:00")
     fill_in("inputLocation", :with => "Loc")
     fill_in("inputDescription", :with => "Desc")
-    page.select("Täglich", :from => "inputRepFreq")
+    page.select("Daily", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "12")
     click_button("submitButton")
     page.should have_css("div.control-group.error", :count => 0)
@@ -138,13 +138,13 @@ describe "javascript behaviour with more forms filled out", :type => :feature do
 end
 
 
-describe "javascript behaviour with unneccesary forms filled out", :type => :feature do
+describe "javascript behaviour with unneccesary forms filled out", :type => :feature, :driver => :firefox_en do
   before(:each) do
     visit '/'
   end
 
   it "does not continue with only first repetition-form filled out" do
-    page.select("Täglich", :from => "inputRepFreq")
+    page.select("Daily", :from => "inputRepFreq")
     click_button("submitButton")
     page.should have_css("div.control-group.error", :count => 5)
   end
@@ -158,7 +158,7 @@ end
 
 
 
-describe "javascript behavior with later deactivated forms", :type => :feature do
+describe "javascript behavior with later deactivated forms", :type => :feature, :driver => :firefox_en do
   it "accepts a form with filled out but deactivated time forms" do
     visit '/'
     # fill out everything first
@@ -174,7 +174,7 @@ describe "javascript behavior with later deactivated forms", :type => :feature d
     fill_in("inputEndTime", :with => "12:00")
     # then activate "all-day" checkbox
     find(:css, "input#wholeDayCheckbox[value='wholeday']").set(true)
-    page.select("Täglich", :from => "inputRepFreq")
+    page.select("Daily", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "12")
     # should accept
     click_button("submitButton")
@@ -185,7 +185,7 @@ end
 
 
 
-describe "javascript behavior with impossible german dates", :type => :feature do
+describe "javascript behavior with impossible german dates", :type => :feature, :driver => :firefox_de do
   before(:each) do
     visit '/'
   end
@@ -284,7 +284,7 @@ end
 
 
 
-describe "javascript behavior with impossible german dates/times", :type => :feature do
+describe "javascript behavior with impossible german dates/times", :type => :feature, :driver => :firefox_de do
   it "sets errors right with impossible times on one day" do
     visit '/'
     fill_in("inputEventName", :with => "Test")

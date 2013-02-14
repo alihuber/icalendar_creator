@@ -6,7 +6,7 @@ require 'spec_helper'
 
 
 # smoke test
-describe "visiting index site", :type => :feature do
+describe "visiting index site", :type => :feature, :driver => :firefox_de do
   it "gets the index page" do
     visit '/'
     page.should have_text("Erstelle eine iCalendar-Datei.")
@@ -14,7 +14,7 @@ describe "visiting index site", :type => :feature do
 end
 
 
-describe "basic event creation", :type => :feature do
+describe "basic event creation", :type => :feature, :driver => :firefox_de do
 
   it "displays a created event" do
     visit '/'
@@ -38,7 +38,7 @@ describe "basic event creation", :type => :feature do
 end
 
 
-describe "basic repeated event creation", :type => :feature do
+describe "basic repeated event creation", :type => :feature, :driver => :firefox_de do
 
   before(:each) do
     visit '/'
@@ -80,7 +80,7 @@ describe "basic repeated event creation", :type => :feature do
   end
 end
 
-describe "german language of repeated event creation", :type => :feature do
+describe "german language of repeated event creation", :type => :feature, :driver => :firefox_de do
   before(:each) do
     visit '/'
     fill_in("inputEventName", :with => "Test")
@@ -317,7 +317,7 @@ describe "mass event creation", :type => :feature do
   end
 end
 
-describe "basic event deletion", :type => :feature do
+describe "basic event deletion", :type => :feature, :driver => :firefox_de do
   it "deletes one event" do
     visit '/'
     fill_in("inputEventName", :with => "Test")
@@ -369,7 +369,7 @@ describe "mass event deletion", :type => :feature do
 end
 
 
-describe "mixed event creation and deletion", :type => :feature do
+describe "mixed event creation and deletion", :type => :feature, :driver => :firefox_de do
 
   it "creates/deletes events and sets IDs properly" do
     visit '/'
