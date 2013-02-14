@@ -285,8 +285,8 @@ end
 
 
 describe "javascript behavior with impossible german dates/times", :type => :feature do
-  visit '/'
   it "sets errors right with impossible times on one day" do
+    visit '/'
     fill_in("inputEventName", :with => "Test")
     fill_in("inputStartDate", :with => "02.12.2012")
     fill_in("inputEndDate", :with => "02.12.2012")
@@ -305,8 +305,8 @@ end
 
 
 describe "javascript behavior with impossible english dates/times", :type => :feature, :driver => :firefox_en do
-  visit '/'
   it "sets errors right with impossible times on one day" do
+    visit '/'
     fill_in("inputEventName", :with => "Test")
     fill_in("inputStartDate", :with => "02/12/2012")
     fill_in("inputEndDate", :with => "02/12/2012")
