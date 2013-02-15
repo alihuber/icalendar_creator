@@ -7,7 +7,10 @@ class ICalendarApp < Sinatra::Application
   set :haml, :format => :html5
 
   # sessions store generated events
-  enable :sessions
+  # enable :sessions
+  use Rack::Session::Cookie, :secret => 'b6c6c402d0713a403631999e65510299d89664c17bf8e152a9ba1f513fa901386faf5bd8ea051ce547287c14c67dadbaba14e230f4f2ed3d50a804b64882fb94'
+
+
 
   configure do
     set :public_folder, Proc.new{ File.join(root, "static") }
