@@ -7,8 +7,7 @@ class ICalendarApp < Sinatra::Application
   set :haml, :format => :html5
 
   # sessions store generated events
-  # enable :sessions
-  use Rack::Session::Cookie, :secret => 'b6c6c402d0713a403631999e65510299d89664c17bf8e152a9ba1f513fa901386faf5bd8ea051ce547287c14c67dadbaba14e230f4f2ed3d50a804b64882fb94'
+  use Rack::Session::Pool
 
 
 
@@ -66,7 +65,7 @@ class ICalendarApp < Sinatra::Application
     text = session[:calendar].create_icalendar
     file.write text
     file.close
-    send_file file.path, :filename => 'icalendar.ics'
+    send_file file.path, :filename => 'icalendar.ics', :disposition => 'attachment'
   end
 
   def extract_locale_from_accept_language_header
