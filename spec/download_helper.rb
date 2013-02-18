@@ -34,6 +34,8 @@ module DownloadHelper
   end
 
   def clear_downloads
+    # avoid errors with temporary files
+    sleep 2
     downloads.each do |file|
       File.delete(file)
     end
