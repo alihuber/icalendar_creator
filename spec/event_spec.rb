@@ -44,6 +44,18 @@ describe Event do
     event.respond_to?(:repetition_freq).should be true
   end
 
+  it 'knows wheter it has an alarm' do
+    event.respond_to?(:has_alarm).should be true
+  end
+
+  it 'has a alarm time unit' do
+    event.respond_to?(:alarm_time_unit).should be true
+  end
+
+  it 'has a alarm time value' do
+    event.respond_to?(:alarm_time_value).should be true
+  end
+
 end
 
 
@@ -254,4 +266,13 @@ describe "interval repeated event creation with interval = 1" do
     event5.repetition_freq.should eql "DAILY"
     event5.repetition_interval.should eql "1"
   end
+end
+
+
+describe "normal event creation with alarm" do
+  let(:event) { Event.new({"name" => "Test", "start_date" => "23.02.2012",
+                          "start_time" => "11:00",
+                          "end_date" => "24.02.2012",
+                          "end_time" => "12:00", "location" => "Loc",
+                          "description" => "Desc"}) }
 end

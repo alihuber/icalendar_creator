@@ -51,6 +51,14 @@ describe EventStringCreator do
     evc.respond_to?(:create_event_string).should be true
   end
 
+  it "should be able to create a string with event repetition" do
+    evc.respond_to?(:create_event_repetition).should be true
+  end
+
+  it "should be able to create a string with event alarm" do
+    evc.respond_to?(:create_alarm_string).should be true
+  end
+
 end
 
 describe "basic header and footer creation" do
@@ -194,11 +202,6 @@ end
 
 describe "complete all-day event string creation" do
 
-  let(:event) { Event.new(['Test', '23.02.2012',
-                          '24.02.2012',
-                          'Loc', 'Desc']) }
-  let(:evc) { EventStringCreator.new(event) }
-
   let(:event) { Event.new({"name" => 'Test', "start_date" => '02/23/2012',
                           "end_date" => '02/24/2012', "wholeday" => "wholeday",
                           "location" => 'Loc', "description" => 'Desc', "repetition_freq" => ""}) }
@@ -206,5 +209,29 @@ describe "complete all-day event string creation" do
 
   it "should create a complete event string" do
     evc.create_event_string.should eql "BEGIN:VEVENT\nDTSTART;VALUE=DATE:20120223\nDTEND;VALUE=DATE:20120224\nSUMMARY:Test\nLOCATION:Loc\nDESCRIPTION:Desc\nEND:VEVENT\n"
+  end
+end
+
+
+describe "alarm string creation" do
+  let(:event) { Event.new({"name" => 'Test', "start_date" => '02/23/2012',
+                          "end_date" => '02/24/2012', "wholeday" => "wholeday",
+                          "location" => 'Loc', "description" => 'Desc', "alarm_time_unit" => "Hours",
+                          "alarm_time_value" => ""}) }
+  let(:evc) { EventStringCreator.new(event) }
+  it "should create a single correct event string" do
+    evc.create_alarm_string.should eql "BEGIN:VALARM\nTRIGGER:-P1H\nACTION:DISPLAY\nDESCRIPTION:Test\nEND:VALARM\n"
+  end
+end
+
+describe "event string creation with alarm" do
+  let(:event) { Event.new({"name" => 'Test', "start_date" => '02/23/2012',
+                          "end_date" => '02/24/2012', "wholeday" => "wholeday",
+                          "location" => 'Loc', "description" => 'Desc', "alarm_time_unit" => "Minutes",
+                          "alarm_time_value" => "30"}) }
+  let(:evc) { EventStringCreator.new(event) }
+
+  it "should create an event with alarm with given properties" do
+    evc.create_event_string.should eql "BEGIN:VEVENT\nDTSTART;VALUE=DATE:20120223\nDTEND;VALUE=DATE:20120224\nSUMMARY:Test\nLOCATION:Loc\nDESCRIPTION:Desc\nBEGIN:VALARM\nTRIGGER:-P30M\nACTION:DISPLAY\nDESCRIPTION:Test\nEND:VALARM\nEND:VEVENT\n"
   end
 end

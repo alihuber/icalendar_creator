@@ -58,8 +58,20 @@ class EventStringCreator
     output += create_event_name
     output += create_event_location
     output += create_event_description
+
+    output += create_alarm_string if @event.has_alarm
+
     output += create_event_end_string
+
     output
+  end
+
+  def create_alarm_string
+    "BEGIN:VALARM\n" +
+    "TRIGGER:-P" + @event.alarm_time_value + @event.alarm_time_unit + "\n" +
+    "ACTION:DISPLAY\n" +
+    "DESCRIPTION:" + @event.name + "\n" +
+    "END:VALARM\n"
   end
 
   def create_event_repetition
@@ -119,7 +131,8 @@ end
 class Event
   attr_accessor :name, :start_date, :end_date,
     :start_time, :end_time, :location, :description, :is_all_day, :is_us_format,
-    :repetition_freq, :repetition_interval, :is_repeated
+    :repetition_freq, :repetition_interval, :is_repeated, :has_alarm, :alarm_time_value,
+    :alarm_time_unit
 
   # we expect a hash
   def initialize(args)
@@ -133,6 +146,9 @@ class Event
 
     @end_time = args["end_time"] if args.include? "end_time"
 
+    @is_repeated = true if args.include? "repetition_freq" and args["repetition_freq"] != ""
+    @has_alarm = true if args.include? "alarm_time_unit" and args["alarm_time_unit"] != ""
+
     if args.include? "wholeday"
       @is_all_day = true
     else
@@ -145,25 +161,35 @@ class Event
       @is_us_format = false
     end
 
-    @repetition_freq = args["repetition_freq"] if args["repetition_freq"] != ""
-
-    @is_repeated = true if args["repetition_freq"] != ""
-
     # Valid values are between 1 and 2147483647, excluding 0
     # "asdf".to_i -> 0
-    value = args["repetition_interval"]
-    if value == "" or value.to_i > 2147483647 or value.to_i < 1
-      @repetition_interval = "1"
-    else
-      @repetition_interval = value
-    end
-
     if @is_repeated
+      @repetition_freq = args["repetition_freq"]
+      value = args["repetition_interval"]
+      if value == "" or value.to_i > 2147483647 or value.to_i < 1
+        @repetition_interval = "1"
+      else
+        @repetition_interval = value
+      end
       @repetition_freq = "YEARLY"  if  @repetition_freq == "Years"  || @repetition_freq == "Jahre"
       @repetition_freq = "MONTHLY" if  @repetition_freq == "Months" || @repetition_freq == "Monate"
       @repetition_freq = "WEEKLY"  if  @repetition_freq == "Weeks"  || @repetition_freq == "Wochen"
       @repetition_freq = "DAILY"   if  @repetition_freq == "Days"   || @repetition_freq == "Tage"
     end
+
+    if @has_alarm
+      @alarm_time_unit = args["alarm_time_unit"]
+      alarm_value = args["alarm_time_value"]
+      if alarm_value == "" or alarm_value.to_i >  2147483647 or alarm_value.to_i < 1
+        @alarm_time_value = "1"
+      else
+        @alarm_time_value = alarm_value
+      end
+      @alarm_time_unit = "D" if @alarm_time_unit == "Days"    || @alarm_time_unit == "Tage"
+      @alarm_time_unit = "H" if @alarm_time_unit == "Hours"   || @alarm_time_unit == "Stunden"
+      @alarm_time_unit = "M" if @alarm_time_unit == "Minutes" || @alarm_time_unit == "Minuten"
+    end
+
   end
 
 
