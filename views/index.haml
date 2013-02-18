@@ -127,34 +127,66 @@
             %div.control-group
               %label.control-label{ :for => "inputRepetition" }
                 - if @language == 'de'
-                  Wiederholen/Zeitabstand:
+                  Wiederholen: Alle
                 - else
-                  Repeat/Interval:
+                  Repeat: Every
               %div.controls
                 - if @language == 'de'
+                  %input.input-xlarge{ :type => "text", :id => "inputInterval", :placeholder => "Zeitabstand (Standard: 1)", :name => "repetition_interval" }
                   %select.input-xlarge{ :type => "select", :id => "inputRepFreq", "placeholder" => "", "name" => "repetition_freq" }
                     %option
                     %option
-                      Täglich
+                      Tage
                     %option
-                      Wöchentlich
+                      Wochen
                     %option
-                      Monatlich
+                      Monate
                     %option
-                      Jährlich
-                  %input.input-xlarge{ :type => "text", :id => "inputInterval", :placeholder => "Zeitabstand (Standard: 1)", :name => "repetition_interval" }
+                      Jahre
                 - else
+                  %input.input-xlarge{ :type => "text", :id => "inputInterval", :placeholder => "Interval (default: 1)", :name => "repetition_interval" }
                   %select.input-xlarge{ :type => "select", :id => "inputRepFreq", "name" => "repetition_freq" }
                     %option
                     %option
-                      Daily
+                      Days
                     %option
-                      Weekly
+                      Weeks
                     %option
-                      Monthly
+                      Months
                     %option
-                      Yearly
-                  %input.input-xlarge{ :type => "text", :id => "inputInterval", :placeholder => "Interval (default: 1)", :name => "repetition_interval" }
+                      Years
+
+            %div.control-group
+              %label.control-label{ :for => "inputAlarm" }
+                Alarm:
+              %div.controls
+                - if @language == 'de'
+                  %input.input-xlarge{ :type => "text", :id => "inputAlarmTimeValue", :placeholder => "Anzahl", :name => "alarm_time_value" }
+                  %select.input-xlarge{ :type => "select", :id => "inputAlarmTimeUnit", "placeholder" => "", "name" => "alarm_time_unit" }
+                    %option
+                    %option
+                      Minuten
+                    %option
+                      Stunden
+                    %option
+                      Tage
+
+                  %span.help-inline
+                    vorher
+
+                - else
+                  %input.input-xlarge{ :type => "text", :id => "inputAlarmTimeValue", :placeholder => "Quantity", :name => "alarm_time_value" }
+                  %select.input-xlarge{ :type => "select", :id => "inputAlarmTimeUnit", "name" => "alarm_time_unit" }
+                    %option
+                    %option
+                      Minutes
+                    %option
+                      Hours
+                    %option
+                      Days
+                  %span.help-inline
+                    before
+
 
             %div.control-group
               %div.controls
