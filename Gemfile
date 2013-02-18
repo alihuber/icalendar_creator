@@ -9,4 +9,5 @@ gem 'rake',         '10.0.3'
 group :test do
   gem 'rspec',      '2.12.0'
   gem 'capybara',   '2.0.1'
+  gem 'fuubar'
 end
