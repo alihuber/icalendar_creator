@@ -49,7 +49,7 @@ describe "basic repeated event creation", :type => :feature, :driver => :firefox
     fill_in("inputEndTime", :with => "12:00")
     fill_in("inputLocation", :with => "Loc")
     fill_in("inputDescription", :with => "Desc")
-    page.select("Täglich", :from => "inputRepFreq")
+    page.select("Tage", :from => "inputRepFreq")
   end
 
   it "displays a created event with repetition and no interval" do
@@ -93,35 +93,35 @@ describe "german language of repeated event creation", :type => :feature, :drive
   end
 
   it "shows correct singular for day" do
-    page.select("Täglich", :from => "inputRepFreq")
+    page.select("Tage", :from => "inputRepFreq")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
     page.should have_text("Jeden Tag")
   end
 
   it "shows correct singular for week" do
-    page.select("Wöchentlich", :from => "inputRepFreq")
+    page.select("Wochen", :from => "inputRepFreq")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
     page.should have_text("Jede Woche")
   end
 
   it "shows correct singular for month" do
-    page.select("Monatlich", :from => "inputRepFreq")
+    page.select("Monate", :from => "inputRepFreq")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
     page.should have_text("Jeden Monat")
   end
 
   it "shows correct singular for year" do
-    page.select("Jährlich", :from => "inputRepFreq")
+    page.select("Jahre", :from => "inputRepFreq")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
     page.should have_text("Jedes Jahr")
   end
 
   it "shows correct day plural for interval 2" do
-    page.select("Täglich", :from => "inputRepFreq")
+    page.select("Tage", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "2")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -129,7 +129,7 @@ describe "german language of repeated event creation", :type => :feature, :drive
   end
 
   it "shows correct day plural for interval 100" do
-    page.select("Täglich", :from => "inputRepFreq")
+    page.select("Tage", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "100")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -137,7 +137,7 @@ describe "german language of repeated event creation", :type => :feature, :drive
   end
 
   it "shows correct week plural for interval 2" do
-    page.select("Wöchentlich", :from => "inputRepFreq")
+    page.select("Wochen", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "2")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -145,7 +145,7 @@ describe "german language of repeated event creation", :type => :feature, :drive
   end
 
   it "shows correct week plural for interval 100" do
-    page.select("Wöchentlich", :from => "inputRepFreq")
+    page.select("Wochen", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "100")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -153,7 +153,7 @@ describe "german language of repeated event creation", :type => :feature, :drive
   end
 
   it "shows correct month plural for interval 2" do
-    page.select("Monatlich", :from => "inputRepFreq")
+    page.select("Monate", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "2")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -161,7 +161,7 @@ describe "german language of repeated event creation", :type => :feature, :drive
   end
 
   it "shows correct month plural for interval 100" do
-    page.select("Monatlich", :from => "inputRepFreq")
+    page.select("Monate", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "100")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -169,7 +169,7 @@ describe "german language of repeated event creation", :type => :feature, :drive
   end
 
   it "shows correct year plural for interval 2" do
-    page.select("Jährlich", :from => "inputRepFreq")
+    page.select("Jahre", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "2")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -177,7 +177,7 @@ describe "german language of repeated event creation", :type => :feature, :drive
   end
 
   it "shows correct year plural for interval 100" do
-    page.select("Jährlich", :from => "inputRepFreq")
+    page.select("Jahre", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "100")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -200,35 +200,35 @@ describe "english language of repeated event creation", :type => :feature, :driv
   end
 
   it "shows correct singular for day" do
-    page.select("Daily", :from => "inputRepFreq")
+    page.select("Days", :from => "inputRepFreq")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
     page.should have_text("Every day")
   end
 
   it "shows correct singular for week" do
-    page.select("Weekly", :from => "inputRepFreq")
+    page.select("Weeks", :from => "inputRepFreq")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
     page.should have_text("Every week")
   end
 
   it "shows correct singular for month" do
-    page.select("Monthly", :from => "inputRepFreq")
+    page.select("Months", :from => "inputRepFreq")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
     page.should have_text("Every month")
   end
 
   it "shows correct singular for year" do
-    page.select("Yearly", :from => "inputRepFreq")
+    page.select("Years", :from => "inputRepFreq")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
     page.should have_text("Every year")
   end
 
   it "shows correct day plural for interval 2" do
-    page.select("Daily", :from => "inputRepFreq")
+    page.select("Days", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "2")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -236,7 +236,7 @@ describe "english language of repeated event creation", :type => :feature, :driv
   end
 
   it "shows correct day plural for interval 100" do
-    page.select("Daily", :from => "inputRepFreq")
+    page.select("Days", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "100")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -244,7 +244,7 @@ describe "english language of repeated event creation", :type => :feature, :driv
   end
 
   it "shows correct week plural for interval 2" do
-    page.select("Weekly", :from => "inputRepFreq")
+    page.select("Weeks", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "2")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -252,7 +252,7 @@ describe "english language of repeated event creation", :type => :feature, :driv
   end
 
   it "shows correct week plural for interval 100" do
-    page.select("Weekly", :from => "inputRepFreq")
+    page.select("Weeks", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "100")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -260,7 +260,7 @@ describe "english language of repeated event creation", :type => :feature, :driv
   end
 
   it "shows correct month plural for interval 2" do
-    page.select("Monthly", :from => "inputRepFreq")
+    page.select("Months", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "2")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -268,7 +268,7 @@ describe "english language of repeated event creation", :type => :feature, :driv
   end
 
   it "shows correct month plural for interval 100" do
-    page.select("Monthly", :from => "inputRepFreq")
+    page.select("Months", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "100")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -276,7 +276,7 @@ describe "english language of repeated event creation", :type => :feature, :driv
   end
 
   it "shows correct year plural for interval 2" do
-    page.select("Yearly", :from => "inputRepFreq")
+    page.select("Years", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "2")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")
@@ -284,7 +284,7 @@ describe "english language of repeated event creation", :type => :feature, :driv
   end
 
   it "shows correct year plural for interval 100" do
-    page.select("Yearly", :from => "inputRepFreq")
+    page.select("Years", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "100")
     click_button("submitButton")
     page.should have_css("i.icon-repeat")

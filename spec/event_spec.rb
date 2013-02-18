@@ -151,7 +151,7 @@ describe "standard repeated event creation" do
                           "location" => "Loc4",
                           "description" => "Desc4",
                           "wholeday" => "wholeday",
-                          "repetition_freq" => "Weekly",
+                          "repetition_freq" => "Weeks",
                           "repetition_interval" => ""}) }
 
   it "should know it is repeated once a week" do
@@ -166,7 +166,7 @@ describe "interval repeated event creation" do
                           "location" => "Loc5",
                           "description" => "Desc5",
                           "wholeday" => "wholeday",
-                          "repetition_freq" => "Daily",
+                          "repetition_freq" => "Days",
                           "repetition_interval" => "2"}) }
 
   it "should know it is repeated every other day" do
@@ -182,7 +182,7 @@ describe "interval repeated event creation with bad strings" do
                           "location" => "Loc5",
                           "description" => "Desc5",
                           "wholeday" => "wholeday",
-                          "repetition_freq" => "daily",
+                          "repetition_freq" => "Days",
                           "repetition_interval" => "asdf"}) }
 
   it "should be repeated every other day despite false string" do
@@ -198,7 +198,7 @@ describe "interval repeated event creation with negative interval" do
                           "location" => "Loc5",
                           "description" => "Desc5",
                           "wholeday" => "wholeday",
-                          "repetition_freq" => "daily",
+                          "repetition_freq" => "Days",
                           "repetition_interval" => "-11"}) }
 
   it "should be repeated every other day despite false string" do
@@ -214,7 +214,7 @@ describe "interval repeated event creation with interval zero" do
                           "location" => "Loc5",
                           "description" => "Desc5",
                           "wholeday" => "wholeday",
-                          "repetition_freq" => "daily",
+                          "repetition_freq" => "Days",
                           "repetition_interval" => "0"}) }
 
   it "should be repeated every other day despite false string" do
@@ -230,7 +230,7 @@ describe "interval repeated event creation with interval too big" do
                           "location" => "Loc5",
                           "description" => "Desc5",
                           "wholeday" => "wholeday",
-                          "repetition_freq" => "daily",
+                          "repetition_freq" => "Days",
                           "repetition_interval" => "2147483648"}) }
 
   it "should be repeated every other day despite false string" do
@@ -247,7 +247,7 @@ describe "interval repeated event creation with interval = 1" do
                           "location" => "Loc5",
                           "description" => "Desc5",
                           "wholeday" => "wholeday",
-                          "repetition_freq" => "daily",
+                          "repetition_freq" => "Days",
                           "repetition_interval" => "2147483648"}) }
 
   it "should be repeated every other day despite false string" do

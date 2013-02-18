@@ -52,12 +52,12 @@ describe "icalendar string creation" do
 
   let(:event3) { Event.new({"name" => 'Test3', "start_date" => '23.02.2012',
                           "start_time" => '11:00', "end_date" => '24.02.2012',
-                          "end_time" => '12:00', "location" => 'Loc3', "description" => 'Desc3', "repetition_freq" => "Wöchentlich",
+                          "end_time" => '12:00', "location" => 'Loc3', "description" => 'Desc3', "repetition_freq" => "Wochen",
                           "repetition_interval" => ""}) }
 
   let(:event4) { Event.new({"name" => 'Test4', "start_date" => '02/23/2012',
                           "start_time" => '11:00', "end_date" => '02/24/2012',
-                          "end_time" => '12:00', "location" => 'Loc4', "description" => 'Desc4', "repetition_freq" => "Daily",
+                          "end_time" => '12:00', "location" => 'Loc4', "description" => 'Desc4', "repetition_freq" => "Days",
                           "repetition_interval" => "2"}) }
   let(:icc) { ICalendarCreator.new }
 

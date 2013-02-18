@@ -130,7 +130,7 @@ describe "javascript behaviour with more forms filled out", :type => :feature, :
     fill_in("inputEndTime", :with => "12:00")
     fill_in("inputLocation", :with => "Loc")
     fill_in("inputDescription", :with => "Desc")
-    page.select("Daily", :from => "inputRepFreq")
+    page.select("Days", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "12")
     click_button("submitButton")
     page.should have_css("div.control-group.error", :count => 0)
@@ -144,13 +144,25 @@ describe "javascript behaviour with unneccesary forms filled out", :type => :fea
   end
 
   it "does not continue with only first repetition-form filled out" do
-    page.select("Daily", :from => "inputRepFreq")
+    page.select("Days", :from => "inputRepFreq")
     click_button("submitButton")
     page.should have_css("div.control-group.error", :count => 5)
   end
 
   it "does not continue with only second repetition-form filled out" do
     fill_in("inputInterval", :with => "12")
+    click_button("submitButton")
+    page.should have_css("div.control-group.error", :count => 5)
+  end
+
+  it "does not continue with only first alarm-form filled out" do
+    fill_in("alarm_time_value", :with => "12")
+    click_button("submitButton")
+    page.should have_css("div.control-group.error", :count => 5)
+  end
+
+  it "does not continue with only second alarm-form filled out" do
+    page.select("Minutes", :from => "alarm_time_unit")
     click_button("submitButton")
     page.should have_css("div.control-group.error", :count => 5)
   end
@@ -174,7 +186,7 @@ describe "javascript behavior with later deactivated forms", :type => :feature, 
     fill_in("inputEndTime", :with => "12:00")
     # then activate "all-day" checkbox
     find(:css, "input#wholeDayCheckbox[value='wholeday']").set(true)
-    page.select("Daily", :from => "inputRepFreq")
+    page.select("Days", :from => "inputRepFreq")
     fill_in("inputInterval", :with => "12")
     # should accept
     click_button("submitButton")

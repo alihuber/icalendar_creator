@@ -158,15 +158,12 @@ class Event
       @repetition_interval = value
     end
 
-    if @is_us_format and @is_repeated
-      @repetition_freq.upcase!
-    else
-        @repetition_freq = "YEARLY"  if  @repetition_freq == "Jährlich"
-        @repetition_freq = "MONTHLY" if  @repetition_freq == "Monatlich"
-        @repetition_freq = "WEEKLY"  if  @repetition_freq == "Wöchentlich"
-        @repetition_freq = "DAILY"   if  @repetition_freq == "Täglich"
+    if @is_repeated
+      @repetition_freq = "YEARLY"  if  @repetition_freq == "Years"  || @repetition_freq == "Jahre"
+      @repetition_freq = "MONTHLY" if  @repetition_freq == "Months" || @repetition_freq == "Monate"
+      @repetition_freq = "WEEKLY"  if  @repetition_freq == "Weeks"  || @repetition_freq == "Wochen"
+      @repetition_freq = "DAILY"   if  @repetition_freq == "Days"   || @repetition_freq == "Tage"
     end
-
   end
 
 

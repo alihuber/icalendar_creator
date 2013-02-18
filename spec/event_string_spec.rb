@@ -136,13 +136,13 @@ end
 describe "repeated non all day us date creation" do
   let(:event) { Event.new({"name" => 'Test', "start_date" => '02/23/2012',
                           "end_date" => '02/24/2012', "start_time" => '11:00',
-                          "end_time" => '12:00', "location" => 'Loc', "description" => 'Desc', "repetition_freq" => "weekly",
+                          "end_time" => '12:00', "location" => 'Loc', "description" => 'Desc', "repetition_freq" => "Weeks",
                           "repetition_interval" => ""}) }
   let(:evc) { EventStringCreator.new(event) }
 
   let(:event2) { Event.new({"name" => 'Test', "start_date" => '02/23/2012',
                           "end_date" => '02/24/2012', "start_time" => '11:00',
-                          "end_time" => '12:00', "location" => 'Loc', "description" => 'Desc', "repetition_freq" => "daily",
+                          "end_time" => '12:00', "location" => 'Loc', "description" => 'Desc', "repetition_freq" => "Days",
                           "repetition_interval" => "2"}) }
   let(:evc2) { EventStringCreator.new(event2) }
 
@@ -159,13 +159,13 @@ end
 describe "repeated non all day non us date creation" do
   let(:event) { Event.new({"name" => 'Test', "start_date" => '23.02.2012',
                           "end_date" => '24.02.2012', "start_time" => '11:00',
-                          "end_time" => '12:00', "location" => 'Loc', "description" => 'Desc', "repetition_freq" => "Wöchentlich",
+                          "end_time" => '12:00', "location" => 'Loc', "description" => 'Desc', "repetition_freq" => "Wochen",
                           "repetition_interval" => ""}) }
   let(:evc) { EventStringCreator.new(event) }
 
   let(:event2) { Event.new({"name" => 'Test', "start_date" => '23.02.2012',
                           "end_date" => '24.02.2012', "start_time" => '11:00',
-                          "end_time" => '12:00', "location" => 'Loc', "description" => 'Desc', "repetition_freq" => "Täglich",
+                          "end_time" => '12:00', "location" => 'Loc', "description" => 'Desc', "repetition_freq" => "Tage",
                           "repetition_interval" => "2"}) }
   let(:evc2) { EventStringCreator.new(event2) }
 
