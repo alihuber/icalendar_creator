@@ -9,9 +9,9 @@ shared_context "created single event" do
   before(:each) do
     visit '/'
     fill_in("inputEventName", :with => "Test")
-    fill_in("inputStartDate", :with => "12.02.2012")
+    fill_in("inputStartDate", :with => "02/12/2012")
     fill_in("inputStartTime", :with => "11:00")
-    fill_in("inputEndDate", :with => "12.02.2012")
+    fill_in("inputEndDate", :with => "02/12/2012")
     fill_in("inputEndTime", :with => "12:00")
     fill_in("inputLocation", :with => "Loc")
     fill_in("inputDescription", :with => "Desc")
