@@ -161,7 +161,7 @@
                 Alarm:
               %div.controls
                 - if @language == 'de'
-                  %input.input-xlarge{ :type => "text", :id => "inputAlarmTimeValue", :placeholder => "Anzahl", :name => "alarm_time_value" }
+                  %input.input-xlarge{ :type => "text", :id => "inputAlarmTimeValue", :placeholder => "Anzahl (Standard: 1)", :name => "alarm_time_value" }
                   %select.input-xlarge{ :type => "select", :id => "inputAlarmTimeUnit", "placeholder" => "", "name" => "alarm_time_unit" }
                     %option
                     %option
@@ -175,7 +175,7 @@
                     vorher
 
                 - else
-                  %input.input-xlarge{ :type => "text", :id => "inputAlarmTimeValue", :placeholder => "Quantity", :name => "alarm_time_value" }
+                  %input.input-xlarge{ :type => "text", :id => "inputAlarmTimeValue", :placeholder => "Quantity (default: 1)", :name => "alarm_time_value" }
                   %select.input-xlarge{ :type => "select", :id => "inputAlarmTimeUnit", "name" => "alarm_time_unit" }
                     %option
                     %option
