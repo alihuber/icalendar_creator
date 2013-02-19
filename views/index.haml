@@ -3,14 +3,14 @@
   %head
     %title
       - if @language == 'de'
-        iCalendar Creator - Erstelle eine iCalendar-Datei
+        Online iCalendar Creator - Erstelle eine iCalendar-Datei
       - else
-        iCalendar Creator - create an iCalendar file
+        Online iCalendar Creator - Create an iCalendar file
 
     - if @language == 'de'
-      %meta{ :name => "description", :content => "iCalendar Creator. Erstelle eine iCalendar-Datei. Importierbar in Google Kalender, Microsoft Outlook oder Apple-Produkten und mit so vielen Terminen wie du möchtest."}
+      %meta{ :name => "description", :content => "Online iCalendar Creator. Erstelle eine iCalendar-Datei. Importierbar in Google Kalender, Microsoft Outlook oder Apple-Produkten und mit so vielen Terminen wie du möchtest."}
     - else
-      %meta{ :name => "description", :content => "iCalendar Creator. Create an iCalendar file. It can be imported by Google Calendar, Microsoft Outlook and Apple applications and supports as many events as you wish."}
+      %meta{ :name => "description", :content => "Online iCalendar Creator. Create an iCalendar file. It can be imported by Google Calendar, Microsoft Outlook and Apple applications and supports as many events as you wish."}
     %link{ :rel => "stylesheet", :href => "lib/bootstrap/css/bootstrap.min.css" }
     %link{ :rel => "stylesheet", :href => "lib/datepicker.css" }
     %link{ :rel => "stylesheet", :href => "lib/timepicker.css" }
@@ -33,7 +33,7 @@
           %div.navbar
             %div.navbar-inner
               %a.brand{ :href => "#" }
-                iCalendar Creator
+                Online iCalendar Creator
               %ul.nav.pull-right
                 %li{ :style => "margin-top: 10px" }
                   <a href="https://twitter.com/share" data-url="http://bit.ly/Txt7eh" data-counturl="http://icalendar-creator.herokuapp.com/" class="twitter-share-button" data-lang="en">Tweet</a>
