@@ -68,7 +68,7 @@ class EventStringCreator
 
   def create_alarm_string
     "BEGIN:VALARM\n" +
-    "TRIGGER:-P" + @event.alarm_time_value + @event.alarm_time_unit + "\n" +
+    "TRIGGER:-PT" + @event.alarm_time_value + @event.alarm_time_unit + "\n" +
     "ACTION:DISPLAY\n" +
     "DESCRIPTION:" + @event.name + "\n" +
     "END:VALARM\n"
