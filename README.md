@@ -20,6 +20,5 @@ Features:
 Roadmap:
 
 *  Better language recognition. Right now, all non-german browser settings will fill in e.g. 02/13/2008 for dates
-*  Visualize alerts on added events
 *  Make events editable
 *  Better layout for events
