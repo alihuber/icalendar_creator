@@ -98,7 +98,7 @@ describe "correct file creation with repetition forms filled out", :type => :fea
 
   it "file is correct with repetition fields filled out" do
     fill_in("inputInterval", :with => "2")
-    page.select("Tage", :from => "inputRepFreq")
+    page.select("Days", :from => "inputRepFreq")
     click_button("submitButton")
     click_button("generateButton")
     wanted_file_content = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ICalendarCreator//NONSGML//EN\nBEGIN:VEVENT\nDTSTART:20121202T110000\nDTEND:20121202T120000\nRRULE:FREQ=DAILY;INTERVAL=2\nSUMMARY:Test\nLOCATION:Loc\nDESCRIPTION:Desc\nEND:VEVENT\nEND:VCALENDAR\n"
@@ -108,7 +108,7 @@ describe "correct file creation with repetition forms filled out", :type => :fea
 
   it "file is correct with alarm fields filled out" do
     fill_in("inputAlarmTimeValue", :with => "2")
-    page.select("Stunden", :from => "inputAlarmTimeUnit")
+    page.select("Hours", :from => "inputAlarmTimeUnit")
     click_button("submitButton")
     click_button("generateButton")
     wanted_file_content = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ICalendarCreator//NONSGML//EN\nBEGIN:VEVENT\nDTSTART:20121202T110000\nDTEND:20121202T120000\nSUMMARY:Test\nLOCATION:Loc\nDESCRIPTION:Desc\nBEGIN:VALARM\nTRIGGER:-PT2H\nACTION:DISPLAY\nDESCRIPTION:Test\nEND:VALARM\nEND:VEVENT\nEND:VCALENDAR\n"
@@ -118,9 +118,9 @@ describe "correct file creation with repetition forms filled out", :type => :fea
 
   it "file is correct with everything filled out" do
     fill_in("inputInterval", :with => "2")
-    page.select("Tage", :from => "inputRepFreq")
+    page.select("Days", :from => "inputRepFreq")
     fill_in("inputAlarmTimeValue", :with => "2")
-    page.select("Stunden", :from => "inputAlarmTimeUnit")
+    page.select("Hours", :from => "inputAlarmTimeUnit")
     click_button("submitButton")
     click_button("generateButton")
     wanted_file_content = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ICalendarCreator//NONSGML//EN\nBEGIN:VEVENT\nDTSTART:20121202T110000\nDTEND:20121202T120000\nRRULE:FREQ=DAILY;INTERVAL=2\nSUMMARY:Test\nLOCATION:Loc\nDESCRIPTION:Desc\nBEGIN:VALARM\nTRIGGER:-PT2H\nACTION:DISPLAY\nDESCRIPTION:Test\nEND:VALARM\nEND:VEVENT\nEND:VCALENDAR\n"
