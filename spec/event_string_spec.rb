@@ -216,7 +216,7 @@ end
 describe "alarm string creation" do
   let(:event) { Event.new({"name" => 'Test', "start_date" => '02/23/2012',
                           "end_date" => '02/24/2012', "wholeday" => "wholeday",
-                          "location" => 'Loc', "description" => 'Desc', "alarm_time_unit" => "Hours",
+                          "location" => 'Loc', "description" => 'Desc', "alarm_time_unit" => "Hour(s)",
                           "alarm_time_value" => ""}) }
   let(:evc) { EventStringCreator.new(event) }
   it "should create a single correct event string" do
@@ -227,7 +227,7 @@ end
 describe "event string creation with alarm" do
   let(:event) { Event.new({"name" => 'Test', "start_date" => '02/23/2012',
                           "end_date" => '02/24/2012', "wholeday" => "wholeday",
-                          "location" => 'Loc', "description" => 'Desc', "alarm_time_unit" => "Minutes",
+                          "location" => 'Loc', "description" => 'Desc', "alarm_time_unit" => "Minute(s)",
                           "alarm_time_value" => "30"}) }
   let(:evc) { EventStringCreator.new(event) }
 

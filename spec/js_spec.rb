@@ -162,7 +162,7 @@ describe "javascript behaviour with unneccesary forms filled out", :type => :fea
   end
 
   it "does not continue with only second alarm-form filled out" do
-    page.select("Minutes", :from => "alarm_time_unit")
+    page.select("Minute(s)", :from => "alarm_time_unit")
     click_button("submitButton")
     page.should have_css("div.control-group.error", :count => 5)
   end

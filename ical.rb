@@ -185,9 +185,9 @@ class Event
       else
         @alarm_time_value = alarm_value
       end
-      @alarm_time_unit = "D" if @alarm_time_unit == "Days"    || @alarm_time_unit == "Tage"
-      @alarm_time_unit = "H" if @alarm_time_unit == "Hours"   || @alarm_time_unit == "Stunden"
-      @alarm_time_unit = "M" if @alarm_time_unit == "Minutes" || @alarm_time_unit == "Minuten"
+      @alarm_time_unit = "D" if @alarm_time_unit == "Day(s)"    || @alarm_time_unit == "Tag(e)"
+      @alarm_time_unit = "H" if @alarm_time_unit == "Hour(s)"   || @alarm_time_unit == "Stunde(n)"
+      @alarm_time_unit = "M" if @alarm_time_unit == "Minute(s)" || @alarm_time_unit == "Minute(n)"
     end
 
   end

@@ -28,6 +28,42 @@
     }
   }
 
+- alarm_string = @event.alarm_time_value
+
+- if @event.alarm_time_value.to_i < 2
+  - if @language == 'de'
+    - if @event.alarm_time_unit == "D"
+      - alarm_string += " Tag vorher"
+    - if @event.alarm_time_unit == "H"
+      - alarm_string += " Stunde vorher"
+    - if @event.alarm_time_unit == "M"
+      - alarm_string += " Minute vorher"
+  - if @language == 'en'
+    - if @event.alarm_time_unit == "D"
+      - alarm_string += " day before"
+    - if @event.alarm_time_unit == "H"
+      - alarm_string += " hour before"
+    - if @event.alarm_time_unit == "M"
+      - alarm_string += " minute before"
+- else
+  - if @language == 'de'
+    - if @event.alarm_time_unit == "D"
+      - alarm_string += " Tage vorher"
+    - if @event.alarm_time_unit == "H"
+      - alarm_string += " Stunden vorher"
+    - if @event.alarm_time_unit == "M"
+      - alarm_string += " Minuten vorher"
+  - if @language == 'en'
+    - if @event.alarm_time_unit == "D"
+      - alarm_string += " days before"
+    - if @event.alarm_time_unit == "H"
+      - alarm_string += " hours before"
+    - if @event.alarm_time_unit == "M"
+      - alarm_string += " minutes before"
+
+
+
+
 - rep_string = ""
 - if @language == 'de'
   - if @event.repetition_interval.to_i < 2
@@ -83,6 +119,9 @@
           - if @event.is_repeated
             %i{:class => "icon-repeat"}
         %th
+          - if @event.has_alarm
+            %i{:class => "icon-time"}
+        %th
           - if @language == 'de'
             Terminname
           - else
@@ -123,7 +162,11 @@
     %body
       %tr
         %td
-          = "#{rep_string}"
+          - if @event.is_repeated
+            = "#{rep_string}"
+        %td
+          - if @event.has_alarm
+            = "#{alarm_string}"
         %td
           = @event.name
         %td

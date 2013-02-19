@@ -293,6 +293,128 @@ describe "english language of repeated event creation", :type => :feature, :driv
 end
 
 
+
+describe "german language of alarm display", :type => :feature, :driver => :firefox_de do
+  before(:each) do
+    visit '/'
+    fill_in("inputEventName", :with => "Test")
+    fill_in("inputStartDate", :with => "02.12.2012")
+    fill_in("inputStartTime", :with => "11:00")
+    fill_in("inputEndDate", :with => "02.12.2012")
+    fill_in("inputEndTime", :with => "12:00")
+    fill_in("inputLocation", :with => "Loc")
+    fill_in("inputDescription", :with => "Desc")
+  end
+
+  it "shows correct singular day" do
+    select("Tag(e)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("1 Tag vorher")
+  end
+
+  it "shows correct singular hour" do
+    select("Stunde(n)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("1 Stunde vorher")
+  end
+
+  it "shows correct singular minute" do
+    select("Minute(n)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("1 Minute vorher")
+  end
+
+  it "shows correct plural days" do
+    fill_in("inputAlarmTimeValue", :with => "2")
+    select("Tag(e)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("2 Tage vorher")
+  end
+
+  it "shows correct plural hours" do
+    fill_in("inputAlarmTimeValue", :with => "3")
+    select("Stunde(n)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("3 Stunden vorher")
+  end
+
+  it "shows correct plural minutes" do
+    fill_in("inputAlarmTimeValue", :with => "30")
+    select("Minute(n)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("30 Minuten vorher")
+  end
+end
+
+
+
+describe "english language of alarm display", :type => :feature, :driver => :firefox_en do
+  before(:each) do
+    visit '/'
+    fill_in("inputEventName", :with => "Test")
+    fill_in("inputStartDate", :with => "02.12.2012")
+    fill_in("inputStartTime", :with => "11:00")
+    fill_in("inputEndDate", :with => "02.12.2012")
+    fill_in("inputEndTime", :with => "12:00")
+    fill_in("inputLocation", :with => "Loc")
+    fill_in("inputDescription", :with => "Desc")
+  end
+
+  it "shows correct singular day" do
+    select("Day(s)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("1 day before")
+  end
+
+  it "shows correct singular hour" do
+    select("Hour(s)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("1 hour before")
+  end
+
+  it "shows correct singular minute" do
+    select("Minute(s)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("1 minute before")
+  end
+
+  it "shows correct plural days" do
+    fill_in("inputAlarmTimeValue", :with => "2")
+    select("Day(s)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("2 days before")
+  end
+
+  it "shows correct plural hours" do
+    fill_in("inputAlarmTimeValue", :with => "3")
+    select("Hour(s)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("3 hours before")
+  end
+
+  it "shows correct plural minutes" do
+    fill_in("inputAlarmTimeValue", :with => "30")
+    select("Minute(s)", :from => "inputAlarmTimeUnit")
+    click_button("submitButton")
+    page.should have_css("i.icon-time")
+    page.should have_text("30 minutes before")
+  end
+end
+
+
+
+
 describe "mass event creation", :type => :feature do
 
   it "displays 10 events" do
