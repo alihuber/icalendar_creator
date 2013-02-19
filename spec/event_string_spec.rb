@@ -220,7 +220,7 @@ describe "alarm string creation" do
                           "alarm_time_value" => ""}) }
   let(:evc) { EventStringCreator.new(event) }
   it "should create a single correct event string" do
-    evc.create_alarm_string.should eql "BEGIN:VALARM\nTRIGGER:-P1H\nACTION:DISPLAY\nDESCRIPTION:Test\nEND:VALARM\n"
+    evc.create_alarm_string.should eql "BEGIN:VALARM\nTRIGGER:-PT1H\nACTION:DISPLAY\nDESCRIPTION:Test\nEND:VALARM\n"
   end
 end
 
@@ -232,6 +232,6 @@ describe "event string creation with alarm" do
   let(:evc) { EventStringCreator.new(event) }
 
   it "should create an event with alarm with given properties" do
-    evc.create_event_string.should eql "BEGIN:VEVENT\nDTSTART;VALUE=DATE:20120223\nDTEND;VALUE=DATE:20120224\nSUMMARY:Test\nLOCATION:Loc\nDESCRIPTION:Desc\nBEGIN:VALARM\nTRIGGER:-P30M\nACTION:DISPLAY\nDESCRIPTION:Test\nEND:VALARM\nEND:VEVENT\n"
+    evc.create_event_string.should eql "BEGIN:VEVENT\nDTSTART;VALUE=DATE:20120223\nDTEND;VALUE=DATE:20120224\nSUMMARY:Test\nLOCATION:Loc\nDESCRIPTION:Desc\nBEGIN:VALARM\nTRIGGER:-PT30M\nACTION:DISPLAY\nDESCRIPTION:Test\nEND:VALARM\nEND:VEVENT\n"
   end
 end
