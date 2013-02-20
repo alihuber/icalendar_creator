@@ -9,7 +9,7 @@ Capybara.default_driver = :selenium
 
 Capybara.register_driver :firefox_en do |app|
   profile = Selenium::WebDriver::Firefox::Profile.new
-  profile["intl.accept_languages"] =  "en"
+  profile["intl.accept_languages"] =  "en-US"
   Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => profile)
 end
 
