@@ -1,15 +1,15 @@
 $(document).ready(function() {
 
   var language = window.navigator.userLanguage || window.navigator.language;
-  var dateformat = '';
-  // sometimes de-DE
-  if(language.startsWith("de")) {
-    language = "de";
-    dateformat = "dd.mm.yyyy";
-  } else {
+  var dateformat = "dd.mm.yyyy"
+  if(language.startsWith("en-US")) {
+    language = "en-US"
     dateformat = "mm/dd/yyyy";
   }
-
+  // sometimes de-DE
+  // if(language.startsWith("de")) {
+  //   language = "de";
+  // }
   $("#clearButton").click(function() {
     clearEntries();
   });
@@ -118,8 +118,15 @@ $(document).ready(function() {
     var dateary1;
     var dateary2;
 
-    if(language == "de") {
+    if(language == "en-US") {
+      var compDate1 = new Date(date1);
+      var compDate2 = new Date(date2);
+      if(compDate2 < compDate1) {
+        $("[id=inputEndDate]").closest('.control-group').addClass('error');
+        errorCount += 1;
+      }
 
+    } else  {
       dateary1 = date1.split(".");
       dateary2 = date2.split(".");
 
@@ -135,14 +142,6 @@ $(document).ready(function() {
       var compDate1 = new Date(year1, month1, day1);
       var compDate2 = new Date(year2, month2, day2);
 
-      if(compDate2 < compDate1) {
-        $("[id=inputEndDate]").closest('.control-group').addClass('error');
-        errorCount += 1;
-      }
-
-    } else  {
-      var compDate1 = new Date(date1);
-      var compDate2 = new Date(date2);
       if(compDate2 < compDate1) {
         $("[id=inputEndDate]").closest('.control-group').addClass('error');
         errorCount += 1;
