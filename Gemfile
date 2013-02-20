@@ -7,7 +7,7 @@ gem 'rack',         '1.4.5'
 gem 'rake',         '10.0.3'
 
 group :test do
-  gem 'rspec',      '2.12.0'
-  gem 'capybara',   '2.0.1'
+  gem 'rspec'
+  gem 'capybara'
   gem 'fuubar'
 end
