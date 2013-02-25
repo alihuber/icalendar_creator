@@ -69,7 +69,13 @@ class ICalendarApp < Sinatra::Application
   end
 
   def extract_locale_from_accept_language_header
-    @language = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    browser_env = request.env['HTTP_ACCEPT_LANGUAGE']
+    if browser_env == nil
+      # default english when sometimes nil
+      @language = 'en'
+    else
+      @language = browser_env.scan(/^[a-z]{2}/).first
+    end
   end
 
   run! if app_file == $0
