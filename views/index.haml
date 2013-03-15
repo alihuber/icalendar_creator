@@ -7,11 +7,13 @@
       - else
         Online iCalendar Creator - Create an iCalendar file
 
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1", :name => "viewport"}
     - if @language == 'de'
       %meta{ :name => "description", :content => "Online iCalendar Creator. Erstelle eine iCalendar-Datei. Importierbar in Google Kalender, Microsoft Outlook oder Apple-Produkten und mit so vielen Terminen wie du möchtest."}
     - else
       %meta{ :name => "description", :content => "Online iCalendar Creator. Create an iCalendar file. It can be imported by Google Calendar, Microsoft Outlook and Apple applications and supports as many events as you wish."}
     %link{ :rel => "stylesheet", :href => "lib/bootstrap/css/bootstrap.min.css" }
+    %link{ :rel => "stylesheet", :href => "lib/bootstrap/css/bootstrap-responsive.min.css" }
     %link{ :rel => "stylesheet", :href => "lib/datepicker.css" }
     %link{ :rel => "stylesheet", :href => "lib/timepicker.css" }
 
@@ -25,7 +27,7 @@
       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
   %body
-    %a{:href => "https://github.com/alihuber/icalendar_creator"}
+    %a.visible-desktop{:href => "https://github.com/alihuber/icalendar_creator"}
       %img{:alt => "Fork me on GitHub", :src => "https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png", :style => "position: absolute; top: 0; right: 0; border: 0;"}/
     %div.container
       %div.row
@@ -200,7 +202,15 @@
                     Felder leeren
                   - else
                     Clear entries
-                %button{ :type => "button", :class => "btn btn-success pull-right", :id => "generateButton", :onclick => "window.location='/generate'" , :disabled => "disabled" }
+                %button.visible-desktop{ :type => "button", :class => "btn btn-success pull-right", :id => "generateButton", :onclick => "window.location='/generate'" , :disabled => "disabled" }
+                  -if @language == 'de'
+                    Datei erstellen
+                  - else
+                    Generate file
+
+                /other button for smaller screens
+                %p.hidden-desktop
+                %button.hidden-desktop.span3{ :type => "button", :class => "btn btn-success", :id => "generateButton", :onclick => "window.location='/generate'" , :disabled => "disabled" }
                   -if @language == 'de'
                     Datei erstellen
                   - else
