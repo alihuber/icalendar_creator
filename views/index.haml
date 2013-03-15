@@ -77,9 +77,11 @@
               %div.controls
                 - if @language == 'de'
                   %input.input-xlarge{ :type => "text", :id => "inputStartDate", :placeholder => "Startdatum", :name => "start_date" }
+                  %p.hidden-desktop
                   %input.input-xlarge{ :type => "text", :id => "inputStartTime", :placeholder => "Von", :name => "start_time" }
                 - else
                   %input.input-xlarge{ :type => "text", :id => "inputStartDate", :placeholder => "Start Date", :name => "start_date" }
+                  %p.hidden-desktop
                   %input.input-xlarge{ :type => "text", :id => "inputStartTime", :placeholder => "Start Time", :name => "start_time" }
 
             %div.control-group
@@ -91,9 +93,11 @@
               %div.controls
                 - if @language == 'de'
                   %input.input-xlarge{ :type => "text", :id => "inputEndDate", :placeholder => "Enddatum", :name => "end_date" }
+                  %p.hidden-desktop
                   %input.input-xlarge{ :type => "text", :id => "inputEndTime", :placeholder => "Bis", :name => "end_time" }
                 - else
                   %input.input-xlarge{ :type => "text", :id => "inputEndDate", :placeholder => "End Date", :name => "end_date" }
+                  %p.hidden-desktop
                   %input.input-xlarge{ :type => "text", :id => "inputEndTime", :placeholder => "End Time", :name => "end_time" }
                 %label.checkbox.inline
                   %input{:type => "checkbox", :id => "wholeDayCheckbox", :value => "wholeday", :name => "wholeday" }
@@ -135,6 +139,7 @@
               %div.controls
                 - if @language == 'de'
                   %input.input-xlarge{ :type => "text", :id => "inputInterval", :placeholder => "Zeitabstand (Standard: 1)", :name => "repetition_interval" }
+                  %p.hidden-desktop
                   %select.input-xlarge{ :type => "select", :id => "inputRepFreq", "placeholder" => "", "name" => "repetition_freq" }
                     %option
                     %option
@@ -164,6 +169,7 @@
               %div.controls
                 - if @language == 'de'
                   %input.input-xlarge{ :type => "text", :id => "inputAlarmTimeValue", :placeholder => "Anzahl (Standard: 1)", :name => "alarm_time_value" }
+                  %p.hidden-desktop
                   %select.input-xlarge{ :type => "select", :id => "inputAlarmTimeUnit", "placeholder" => "", "name" => "alarm_time_unit" }
                     %option
                     %option
