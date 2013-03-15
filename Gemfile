@@ -9,5 +9,6 @@ gem 'rake',         '10.0.3'
 group :test do
   gem 'rspec'
   gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'fuubar'
 end
