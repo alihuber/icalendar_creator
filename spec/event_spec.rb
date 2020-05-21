@@ -66,31 +66,31 @@ describe "normal event creation" do
                           "end_time" => "12:00", "location" => "Loc",
                           "description" => "Desc"}) }
 
-  its "name should be 'Test'" do
+  it "name should be 'Test'" do
     event.name.should eq "Test"
   end
 
-  its "start date should be '23.02.2012'" do
+  it "start date should be '23.02.2012'" do
     event.start_date.should eq "23.02.2012"
   end
 
-  its "end date should be '24.02.2012'" do
+  it "end date should be '24.02.2012'" do
     event.end_date.should eq "24.02.2012"
   end
 
-  its "start time should be '11:00'" do
+  it "start time should be '11:00'" do
     event.start_time.should eq "11:00"
   end
 
-  its "end time should be '12:00'" do
+  it "end time should be '12:00'" do
     event.end_time.should eq "12:00"
   end
 
-  its "location should be 'Loc'" do
+  it "location should be 'Loc'" do
     event.location.should eq "Loc"
   end
 
-  its "description should be 'Desc'" do
+  it "description should be 'Desc'" do
     event.description.should eq "Desc"
   end
 
@@ -112,23 +112,23 @@ describe "all day event creation" do
                           "description" => "Desc2",
                           "wholeday" => "wholeday"}) }
 
-  its "name should be 'Test2'" do
+  it "name should be 'Test2'" do
     event2.name.should eq "Test2"
   end
 
-  its "start date should be '23.02.2012'" do
+  it "start date should be '23.02.2012'" do
     event2.start_date.should eq "23.02.2012"
   end
 
-  its "end date should be '24.02.2012'" do
+  it "end date should be '24.02.2012'" do
     event2.end_date.should eq "24.02.2012"
   end
 
-  its "location should be 'Loc2'" do
+  it "location should be 'Loc2'" do
     event2.location.should eq "Loc2"
   end
 
-  its "description should be 'Desc2'" do
+  it "description should be 'Desc2'" do
     event2.description.should eq "Desc2"
   end
 
