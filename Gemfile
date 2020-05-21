@@ -12,4 +12,5 @@ group :test do
   gem 'puma'
   gem 'selenium-webdriver'
   gem 'fuubar'
+  gem 'pry'
 end

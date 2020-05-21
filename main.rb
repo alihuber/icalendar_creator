@@ -52,7 +52,9 @@ class ICalendarApp < Sinatra::Application
       session[:calendar].add_event(@id, @event)
     end
 
+    puts '### GOT EVENT'
     puts session[:calendar].events
+    puts
 
     # return html fragment to put variables in
     # and add to site
