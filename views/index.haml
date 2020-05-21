@@ -22,9 +22,6 @@
     %script{ :src => "/lib/datepicker.js", :type => "text/javascript" }
     %script{ :src => "/lib/timepicker.js", :type => "text/javascript" }
     %script{ :src => "/lib/script.js", :type => "text/javascript" }
-    :javascript
-      // handle twitter api
-      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
   %body
     %a.visible-desktop{:href => "https://github.com/alihuber/icalendar_creator"}
@@ -36,9 +33,6 @@
             %div.navbar-inner
               %a.brand{ :href => "#" }
                 Online iCalendar Creator
-              %ul.nav.pull-right
-                %li{ :style => "margin-top: 10px" }
-                  <a href="https://twitter.com/share" data-url="http://bit.ly/Txt7eh" data-counturl="http://icalendar-creator.herokuapp.com/" class="twitter-share-button" data-lang="en">Tweet</a>
       %div.well
         %h2
           - if @language == 'de'
@@ -126,9 +120,9 @@
                   Description:
               %div.controls
                 - if @language == 'de'
-                  %input.input-block-level{ :type => "text", :id => "inputDescription", :placeholder => "Beschreibung", :name => "description" }
+                  %textarea.input-block-level{ :type => "text", :id => "inputDescription", :placeholder => "Beschreibung", :name => "description" }
                 - else
-                  %input.input-block-level{ :type => "text", :id => "inputDescription", :placeholder => "Description", :name => "description" }
+                  %textarea.input-block-level{ :type => "text", :id => "inputDescription", :placeholder => "Description", :name => "description" }
 
             %div.control-group
               %label.control-label{ :for => "inputRepetition" }
