@@ -8,11 +8,14 @@ gem 'haml',         '4.0.0'
 gem 'rack',         '2.2.2'
 gem 'rake',         '13.0.1'
 
+group :development do
+  gem 'pry'
+end
+
 group :test do
   gem 'rspec'
   gem 'capybara'
   gem 'puma'
   gem 'selenium-webdriver'
   gem 'fuubar'
-  gem 'pry'
 end

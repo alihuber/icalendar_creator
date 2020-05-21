@@ -81,6 +81,7 @@ class EventStringCreator
 
 
   def create_event_description
+    @event.description.gsub!("\r\n", "\\n")
     "DESCRIPTION:" + @event.description + "\n"
   end
 
