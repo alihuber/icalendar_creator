@@ -36,7 +36,7 @@ GEM
     puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.2.2)
-    rack-protection (2.0.8.1)
+    rack-protection (2.2.0)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -56,15 +56,15 @@ GEM
       rspec-support (~> 3.9.0)
     rspec-support (3.9.3)
     ruby-progressbar (1.10.1)
-    ruby2_keywords (0.0.2)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.0)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    sinatra (2.0.8.1)
+    sinatra (2.2.0)
       mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.8.1)
+      rack (~> 2.2)
+      rack-protection (= 2.2.0)
       tilt (~> 2.0)
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
@@ -87,7 +87,7 @@ DEPENDENCIES
   rake (= 13.0.1)
   rspec
   selenium-webdriver
-  sinatra (= 2.0.8.1)
+  sinatra (= 2.2.0)
   thin (= 1.7.2)
 
 RUBY VERSION
